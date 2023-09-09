@@ -15,8 +15,7 @@ This repository contains a template project with some of the best practices for 
 
 ## Development Environment
 
-* Operational system: Windows
-* Package Manager: [Chocolatey](https://chocolatey.org/)
+* Operational system: Linux
 * Automation tool: [Taskfile](https://taskfile.dev/)
 * IDE: [IntelliJ IDEA](https://www.jetbrains.com/idea/)
 * Code Version control: [Git](https://git-scm.com/)
