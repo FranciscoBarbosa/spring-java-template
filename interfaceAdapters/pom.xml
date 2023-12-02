@@ -6,16 +6,7 @@
         <artifactId>spring-java-template</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>app</artifactId>
-    <version>0.0.1</version>
-    <properties>
-        <domain.version>0.0.1</domain.version>
-    </properties>
-    <dependencies>
-        <dependency>
-            <groupId>com.francisco</groupId>
-            <artifactId>domain</artifactId>
-            <version>${domain.version}</version>
-        </dependency>
-    </dependencies>
+    <artifactId>interfaceAdapters</artifactId>
+    <name>interfaceAdapters</name>
+    <url>http://maven.apache.org</url>
 </project>
