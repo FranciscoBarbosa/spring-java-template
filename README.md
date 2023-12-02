@@ -32,7 +32,7 @@ This repository contains a template project with some of the best practices for 
 ### Language and Frameworks
 * Java Version: [Java 17](https://jdk.java.net/17/)
 * Spring version: [Spring Boot 3](https://spring.io/projects/spring-boot)
-* Dependency management tool: Gradle/Maven (to be defined)
+* Dependency management tool: [Maven](https://maven.apache.org/)
 * Reactive toolkit: [Spring Webflux](https://docs.spring.io/spring-framework/reference/web/webflux.html)
 
 ### Tests
