@@ -1,6 +1,6 @@
 import entities.Status;
 import entities.Task;
-import entities.exceptions.TaskCreationException;
+import entities.exceptions.TaskException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TaskTest {
     @Test
     void shouldCreateNotStartedTask(){
-        final var task = new Task(
+        final var task = new Task(0,
                 "Buy Christmas gifts",
                 "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
                 Status.NOT_STARTED
@@ -26,7 +26,7 @@ public class TaskTest {
 
     @Test
     void shouldCreateTaskOnDoingStatusWithStartDate(){
-        final var task = new Task(
+        final var task = new Task(0,
                 "Buy Christmas gifts",
                 "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
                 Status.DOING,
@@ -42,7 +42,7 @@ public class TaskTest {
 
     @Test
     void shouldCreateTaskOnFinishedStatusWithStartAndFinishedDate(){
-        final var task = new Task(
+        final var task = new Task(0,
                 "Buy Christmas gifts",
                 "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
                 Status.FINISHED,
@@ -59,8 +59,8 @@ public class TaskTest {
 
     @Test
     void shouldThrowExceptionWhenCreatingTaskOnDoingStatusWithoutStartDate(){
-        Exception ex = assertThrows(TaskCreationException.class, () -> {
-            new Task(
+        Exception ex = assertThrows(TaskException.class, () -> {
+            new Task(0,
                     "Buy Christmas gifts",
                     "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
                     Status.DOING
@@ -72,8 +72,8 @@ public class TaskTest {
 
     @Test
     void shouldThrowExceptionWhenCreatingTaskOnDoingStatusWithFinishedDate(){
-        Exception ex = assertThrows(TaskCreationException.class, () -> {
-            new Task(
+        Exception ex = assertThrows(TaskException.class, () -> {
+            new Task(0,
                     "Buy Christmas gifts",
                     "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
                     Status.DOING,
@@ -86,8 +86,8 @@ public class TaskTest {
 
     @Test
     void shouldThrowExceptionWhenCreatingTaskOnFinishedStatusWithoutStartedDate(){
-        Exception ex = assertThrows(TaskCreationException.class, () -> {
-            new Task(
+        Exception ex = assertThrows(TaskException.class, () -> {
+            new Task(0,
                     "Buy Christmas gifts",
                     "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
                     Status.FINISHED,
@@ -100,8 +100,8 @@ public class TaskTest {
 
     @Test
     void shouldThrowExceptionWhenCreatingTaskOnFinishedStatusWithoutFinishedDate(){
-        Exception ex = assertThrows(TaskCreationException.class, () -> {
-            new Task(
+        Exception ex = assertThrows(TaskException.class, () -> {
+            new Task(0,
                     "Buy Christmas gifts",
                     "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
                     Status.FINISHED,

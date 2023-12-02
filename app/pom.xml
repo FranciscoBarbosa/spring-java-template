@@ -7,9 +7,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>app</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <properties>
-        <domain.version>0.0.1</domain.version>
+        <domain.version>0.0.1-SNAPSHOT</domain.version>
     </properties>
     <dependencies>
         <dependency>

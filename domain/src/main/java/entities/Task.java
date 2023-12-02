@@ -1,12 +1,13 @@
 package entities;
 
-import entities.exceptions.TaskCreationException;
-import lombok.Getter;
+import entities.exceptions.TaskException;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Getter
+@Data
 public class Task {
+    private int id;
     private String name;
     private String description;
     private Status status;
@@ -14,23 +15,26 @@ public class Task {
     private LocalDateTime finishedDate;
 
 
-    public Task(String name, String description, Status status) {
+    public Task(int id, String name, String description, Status status) {
         validateInstantiationTaskParams(status, startDate, null);
+        this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
     }
 
-    public Task(String name, String description, Status status, LocalDateTime startDate) {
+    public Task(int id, String name, String description, Status status, LocalDateTime startDate) {
         validateInstantiationTaskParams(status, startDate, null);
+        this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
         this.startDate = startDate;
     }
 
-    public Task(String name, String description, Status status, LocalDateTime startDate, LocalDateTime finishedDate) {
+    public Task(int id, String name, String description, Status status, LocalDateTime startDate, LocalDateTime finishedDate) {
         validateInstantiationTaskParams(status, startDate, finishedDate);
+        this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;
@@ -41,33 +45,33 @@ public class Task {
     private void validateInstantiationTaskParams(Status status, LocalDateTime startDate, LocalDateTime finishedDate){
         if(status == Status.NOT_STARTED){
             if(startDate != null) {
-                throw new TaskCreationException("Not started tasks can't have a startDate");
+                throw new TaskException("Not started tasks can't have a startDate");
             }
             if(finishedDate != null){
-                throw new TaskCreationException("Not started tasks can't have a finishedDate");
+                throw new TaskException("Not started tasks can't have a finishedDate");
             }
         }
         if(status == Status.DOING){
             if(startDate == null) {
-                throw new TaskCreationException("Doing tasks must have a startDate");
+                throw new TaskException("Doing tasks must have a startDate");
             }
             if(finishedDate != null) {
-                throw new TaskCreationException("Not finished tasks can't have a finishedDate");
+                throw new TaskException("Not finished tasks can't have a finishedDate");
             }
         }
         if(status == Status.FINISHED){
             if(startDate == null || finishedDate == null){
-                throw new TaskCreationException("Finished tasks must have a start and finished date");
+                throw new TaskException("Finished tasks must have a start and finished date");
             }
         }
     }
 
     private void validateMarkAsFinishedParams(){
         if(finishedDate.isBefore(startDate)){
-            throw new TaskCreationException("Can't mark a task as finished with finishedDate previous to the start date");
+            throw new TaskException("Can't mark a task as finished with finishedDate previous to the start date");
         }
         if(status.equals(Status.NOT_STARTED)){
-            throw new TaskCreationException("Can't mark a task as finished before it has started");
+            throw new TaskException("Can't mark a task as finished before it has started");
         }
     }
 }

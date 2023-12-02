@@ -51,7 +51,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>frameworks/src/main/java/app/AppApplication.java</mainClass>
+					<mainClass>frameworks/src/main/java/launcher/AppApplication.java</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
