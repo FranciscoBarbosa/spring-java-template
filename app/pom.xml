@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.francisco</groupId>
+        <groupId>pt.com.francisco</groupId>
         <artifactId>spring-java-template</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
@@ -13,8 +13,8 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.francisco</groupId>
-            <artifactId>domain</artifactId>
+            <groupId>pt.com.francisco</groupId>
+            <artifactId>entities</artifactId>
             <version>${domain.version}</version>
         </dependency>
     </dependencies>

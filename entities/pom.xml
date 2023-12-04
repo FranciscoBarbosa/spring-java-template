@@ -6,7 +6,17 @@
         <artifactId>spring-java-template</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>interfaceAdapters</artifactId>
-    <name>interfaceAdapters</name>
-    <url>http://maven.apache.org</url>
+    <artifactId>entities</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
