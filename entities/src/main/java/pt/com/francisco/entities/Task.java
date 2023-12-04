@@ -66,12 +66,11 @@ public class Task {
         }
     }
 
-    private void validateMarkAsFinishedParams(){
-        if(finishedDate.isBefore(startDate)){
-            throw new TaskException("Can't mark a task as finished with finishedDate previous to the start date");
+    public void complete(){
+        if(status.equals(Status.FINISHED)){
+            throw new TaskException("Can't complete an already finished task");
         }
-        if(status.equals(Status.NOT_STARTED)){
-            throw new TaskException("Can't mark a task as finished before it has started");
-        }
+        status = Status.FINISHED;
+        finishedDate = LocalDateTime.now();
     }
 }

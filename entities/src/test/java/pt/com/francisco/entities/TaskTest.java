@@ -1,5 +1,7 @@
 package pt.com.francisco.entities;
 
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 import pt.com.francisco.entities.Status;
 import pt.com.francisco.entities.Task;
 import pt.com.francisco.entities.exceptions.TaskException;
@@ -9,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class TaskTest {
     @Test
@@ -112,6 +116,42 @@ public class TaskTest {
         });
 
         Assertions.assertThat(ex.getMessage()).isEqualTo("Finished tasks must have a start and finished date");
+    }
+
+    @Test
+    void shouldCompleteTask(){
+        final var task = new Task(0,
+                "Buy Christmas gifts",
+                "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
+                Status.DOING,
+                LocalDateTime.of(2023,11,23,10,2)
+        );
+        LocalDateTime currentLocalDate = LocalDateTime.of(2023,11,24,1,20);
+
+        task.complete();
+
+        Assertions.assertThat(task.getStatus()).isEqualTo(Status.FINISHED);
+        try (MockedStatic<LocalDateTime> topDateTimeUtilMock = Mockito.mockStatic(LocalDateTime.class)) {
+            topDateTimeUtilMock.when(LocalDateTime::now).thenReturn(currentLocalDate);
+        }
+    }
+
+    @Test
+    void shouldNotCompleteAlreadyFinishedTask(){
+
+        Exception ex = assertThrows(TaskException.class, () -> {
+            final var task = new Task(0,
+                    "Buy Christmas gifts",
+                    "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
+                    Status.FINISHED,
+                    LocalDateTime.of(2023,11,23,10,2),
+                    LocalDateTime.of(2023,11,24,10,2)
+            );
+
+            task.complete();
+        });
+
+        Assertions.assertThat(ex.getMessage()).isEqualTo("Can't complete an already finished task");
     }
 
 }

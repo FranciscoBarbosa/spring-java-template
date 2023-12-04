@@ -1,42 +1,53 @@
 package pt.com.francisco.useCases.interactorPort;
 
-import pt.com.francisco.repository.TaskRepository;
+import org.springframework.stereotype.Service;
 import pt.com.francisco.entities.Task;
 import lombok.RequiredArgsConstructor;
-import pt.com.francisco.services.TaskService;
+import pt.com.francisco.useCases.databaseGateways.TaskGateway;
+import pt.com.francisco.useCases.exceptions.TaskNotFoundException;
 import pt.com.francisco.useCases.inputPort.TaskUseCase;
 
 import java.util.List;
-import java.util.Optional;
 
+@Service
 @RequiredArgsConstructor
 public class TaskUseCaseImpl implements TaskUseCase {
-    private final TaskService taskService;
-    private final TaskRepository taskRepository;
+    private final TaskGateway taskGateway;
 
     @Override
     public void createTask(Task task) {
-        taskRepository.create(task);
+        taskGateway.create(task);
     }
 
     @Override
     public void updateTask(Task task) {
-        taskService.updateTask(task);
+        throwExceptionIfNotExistentTask(task.getId());
+        taskGateway.update(task);
     }
     @Override
     public void completeTask(int id) {
-        taskService.completeTask(id);
+        throwExceptionIfNotExistentTask(id);
+        final Task task = taskGateway.get(id).get();
+        task.complete();
     }
     @Override
-    public Optional<Task> getTask(int id) {
-        return taskRepository.get(id);
+    public Task getTask(int id) {
+        throwExceptionIfNotExistentTask(id);
+        return taskGateway.get(id).get();
     }
     @Override
-    public List<Task> listTasks() {
-        return taskRepository.getAll();
+    public List<Task> getAllTasks() {
+        return taskGateway.getAll();
     }
     @Override
     public void removeTask(int id) {
-        taskService.removeTask(id);
+        throwExceptionIfNotExistentTask(id);
+        taskGateway.delete(id);
+    }
+
+    private void throwExceptionIfNotExistentTask(int id){
+        if(taskGateway.get(id).isEmpty() ){
+            throw new TaskNotFoundException();
+        }
     }
 }

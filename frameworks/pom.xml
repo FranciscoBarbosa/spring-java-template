@@ -10,7 +10,15 @@
   </parent>
   <artifactId>frameworks</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <build>
+    <dependencies>
+        <dependency>
+            <groupId>pt.com.francisco</groupId>
+            <artifactId>app</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <build>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
