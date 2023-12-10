@@ -7,6 +7,40 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>interfaceAdapters</artifactId>
-    <name>interfaceAdapters</name>
-    <url>http://maven.apache.org</url>
+    <version>0.0.1-SNAPSHOT</version>
+    <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.openapitools</groupId>-->
+<!--            <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--        </dependency>-->
+    </dependencies>
+    <build>
+<!--        <plugins>-->
+<!--            <plugin>-->
+<!--                <groupId>org.openapitools</groupId>-->
+<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <inputSpec>-->
+<!--                                ${project.basedir}/src/main/resources/petstore.yml-->
+<!--                            </inputSpec>-->
+<!--                            <generatorName>spring</generatorName>-->
+<!--                            <apiPackage>com.baeldung.openapi.api</apiPackage>-->
+<!--                            <modelPackage>com.baeldung.openapi.model</modelPackage>-->
+<!--                            <supportingFilesToGenerate>-->
+<!--                                ApiUtil.java-->
+<!--                            </supportingFilesToGenerate>-->
+<!--                            <configOptions>-->
+<!--                                <delegatePattern>true</delegatePattern>-->
+<!--                            </configOptions>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+<!--        </plugins>-->
+    </build>
 </project>

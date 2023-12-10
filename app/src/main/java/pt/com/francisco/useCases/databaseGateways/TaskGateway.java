@@ -1,6 +1,5 @@
 package pt.com.francisco.useCases.databaseGateways;
 
-import org.springframework.stereotype.Repository;
 import pt.com.francisco.entities.Task;
 
 import java.util.List;

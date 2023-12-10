@@ -1,6 +1,5 @@
 package pt.com.francisco.useCases.interactorPort;
 
-import org.springframework.stereotype.Service;
 import pt.com.francisco.entities.Task;
 import lombok.RequiredArgsConstructor;
 import pt.com.francisco.useCases.databaseGateways.TaskGateway;
@@ -9,7 +8,6 @@ import pt.com.francisco.useCases.inputPort.TaskUseCase;
 
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
 public class TaskUseCaseImpl implements TaskUseCase {
     private final TaskGateway taskGateway;

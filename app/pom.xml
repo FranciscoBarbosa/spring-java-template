@@ -6,6 +6,7 @@
         <artifactId>spring-java-template</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <groupId>pt.com.francisco</groupId>
     <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
@@ -16,6 +17,11 @@
             <groupId>pt.com.francisco</groupId>
             <artifactId>entities</artifactId>
             <version>${domain.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

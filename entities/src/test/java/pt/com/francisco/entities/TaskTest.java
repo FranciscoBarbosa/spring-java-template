@@ -2,8 +2,6 @@ package pt.com.francisco.entities;
 
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import pt.com.francisco.entities.Status;
-import pt.com.francisco.entities.Task;
 import pt.com.francisco.entities.exceptions.TaskException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,8 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class TaskTest {
     @Test
