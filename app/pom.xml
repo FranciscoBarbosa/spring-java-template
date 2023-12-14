@@ -6,7 +6,6 @@
         <artifactId>spring-java-template</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>pt.com.francisco</groupId>
     <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
