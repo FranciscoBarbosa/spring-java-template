@@ -23,6 +23,14 @@ paths:
                         schema:
                             $ref: '#/components/schemas/taskRequest'
     /task/{taskId}:
+        parameters:
+            - in: path
+              name: taskId
+              required: true
+              schema:
+                  type: array
+                  items:
+                      type: string
         get:
             description: returns a single task from the system
             responses:
@@ -38,13 +46,6 @@ paths:
                     description: Invalid request
                 default:
                     description: Unexpected error
-            parameters:
-                - name: taskId
-                  in: path
-                  schema:
-                    type: array
-                    items:
-                        type: string
         put:
             description: change task status
             responses:
