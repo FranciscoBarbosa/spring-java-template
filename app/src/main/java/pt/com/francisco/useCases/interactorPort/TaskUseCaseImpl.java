@@ -33,10 +33,12 @@ public class TaskUseCaseImpl implements TaskUseCase {
         throwExceptionIfNotExistentTask(id);
         return taskGateway.get(id).get();
     }
+
     @Override
     public List<Task> getAllTasks() {
         return taskGateway.getAll();
     }
+
     @Override
     public void removeTask(int id) {
         throwExceptionIfNotExistentTask(id);

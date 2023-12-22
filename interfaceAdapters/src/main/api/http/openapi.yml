@@ -6,6 +6,7 @@ paths:
     /task:
         post:
             description: create a new task
+            operationId: createNewTask
             responses:
                 '201':
                     description: Task created successfully
@@ -33,6 +34,7 @@ paths:
                       type: string
         get:
             description: returns a single task from the system
+            operationId: getTask
             responses:
                 '200':
                     description: Task response
@@ -48,6 +50,7 @@ paths:
                     description: Unexpected error
         put:
             description: change task status
+            operationId: updateTask
             responses:
                 '201':
                     description: Task created successfully, no content to return
@@ -65,6 +68,7 @@ paths:
     /tasks:
         get:
             description: returns all tasks from the system
+            operationId: getAllTasks
             responses:
                 '200':
                     description: A list of tasks
@@ -103,6 +107,8 @@ components:
         taskRequest:
             type: object
             properties:
+                id:
+                    type: integer
                 name:
                     type: string
                 description:

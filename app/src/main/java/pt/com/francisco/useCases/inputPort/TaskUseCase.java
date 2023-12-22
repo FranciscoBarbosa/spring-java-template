@@ -9,5 +9,7 @@ public interface TaskUseCase {
     void removeTask(int id);
     void completeTask(int id);
     Task getTask(int id);
+
     List<Task> getAllTasks();
+
 }

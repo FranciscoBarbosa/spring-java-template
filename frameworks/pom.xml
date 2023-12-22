@@ -67,11 +67,13 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>
-                                ${project.basedir}/../interfaceAdapters/src/main/api/http/openapi.yml
-                            </inputSpec>
+                            <inputSpec>${project.basedir}/../interfaceAdapters/src/main/api/http/openapi.yml</inputSpec>
                             <generatorName>spring</generatorName>
-                            <apiPackage>pt.com.francisco.api</apiPackage>
+                            <apiPackage>org.openapi.spring.openapi_yml.api</apiPackage>
+                            <configOptions>
+                                <interfaceOnly>true</interfaceOnly>
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                            </configOptions>
                         </configuration>
                     </execution>
                 </executions>
