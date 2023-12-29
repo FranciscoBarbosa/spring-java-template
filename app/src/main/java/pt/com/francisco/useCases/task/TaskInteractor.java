@@ -1,20 +1,18 @@
-package pt.com.francisco.useCases.interactorPort;
+package pt.com.francisco.useCases.task;
 
 import pt.com.francisco.entities.Task;
 import lombok.RequiredArgsConstructor;
-import pt.com.francisco.useCases.databaseGateways.TaskGateway;
-import pt.com.francisco.useCases.exceptions.TaskNotFoundException;
-import pt.com.francisco.useCases.inputPort.TaskUseCase;
 
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
-public class TaskUseCaseImpl implements TaskUseCase {
+public class TaskInteractor implements TaskInputBoundary {
     private final TaskGateway taskGateway;
 
     @Override
-    public void createTask(Task task) {
-        taskGateway.create(task);
+    public Task createTask(Task task) {
+        return taskGateway.create(task);
     }
 
     @Override
@@ -23,13 +21,13 @@ public class TaskUseCaseImpl implements TaskUseCase {
         taskGateway.update(task);
     }
     @Override
-    public void completeTask(int id) {
+    public void completeTask(UUID id) {
         throwExceptionIfNotExistentTask(id);
         final Task task = taskGateway.get(id).get();
         task.complete();
     }
     @Override
-    public Task getTask(int id) {
+    public Task getTask(UUID id) {
         throwExceptionIfNotExistentTask(id);
         return taskGateway.get(id).get();
     }
@@ -40,12 +38,12 @@ public class TaskUseCaseImpl implements TaskUseCase {
     }
 
     @Override
-    public void removeTask(int id) {
+    public void removeTask(UUID id) {
         throwExceptionIfNotExistentTask(id);
         taskGateway.delete(id);
     }
 
-    private void throwExceptionIfNotExistentTask(int id){
+    private void throwExceptionIfNotExistentTask(UUID id){
         if(taskGateway.get(id).isEmpty() ){
             throw new TaskNotFoundException();
         }

@@ -1,10 +1,9 @@
 package pt.com.francisco.entities;
 
-import pt.com.francisco.entities.Status;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class StatusTest {
+class StatusTest {
 
     @Test
     void shouldHaveFinishedStatus(){

@@ -32,6 +32,8 @@
 		<spring-boot-starter.version>3.2.0</spring-boot-starter.version>
 		<spring-boot-starter-test.version>3.2.0</spring-boot-starter-test.version>
 		<spring-boot-starter-web.version>3.2.0</spring-boot-starter-web.version>
+		<org.mapstruct.version>1.6.0.Beta1</org.mapstruct.version>
+		<spring-data-starter-data-jpa.version>3.2.1</spring-data-starter-data-jpa.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -56,6 +58,11 @@
 				<artifactId>spring-boot-starter-test</artifactId>
 				<version>${spring-boot-starter-test.version}</version>
 				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-jpa</artifactId>
+				<version>${spring-data-starter-data-jpa.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.openapitools</groupId>
@@ -86,6 +93,11 @@
 				<artifactId>junit-jupiter</artifactId>
 				<version>${junit-jupiter.version}</version>
 				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>${org.mapstruct.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
