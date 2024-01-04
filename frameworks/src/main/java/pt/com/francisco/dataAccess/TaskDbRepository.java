@@ -1,10 +1,12 @@
-package pt.com.francisco.interfaceAdapters.dataAccess;
+package pt.com.francisco.dataAccess;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Repository
 public interface TaskDbRepository extends CrudRepository<TaskDbEntity, UUID> {
     @Override
     public TaskDbEntity save(TaskDbEntity task);

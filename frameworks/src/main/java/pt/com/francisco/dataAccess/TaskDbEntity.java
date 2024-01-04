@@ -1,4 +1,4 @@
-package pt.com.francisco.interfaceAdapters.dataAccess;
+package pt.com.francisco.dataAccess;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

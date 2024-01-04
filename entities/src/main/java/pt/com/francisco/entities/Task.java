@@ -15,6 +15,10 @@ public class Task {
     private LocalDateTime startDate;
     private LocalDateTime finishedDate;
 
+    //TODO: replace these constructors by builder
+    public Task(){
+
+    }
 
     public Task(String name, String description, Status status) {
         validateInstantiationTaskParams(status, startDate, null);

@@ -1,16 +1,18 @@
-package pt.com.francisco.interfaceAdapters.dataAccess;
+package pt.com.francisco.dataAccess;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import pt.com.francisco.entities.Task;
 import pt.com.francisco.useCases.task.TaskGateway;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @RequiredArgsConstructor
+@Component
 public class TaskGatewayImpl implements TaskGateway {
     private final TaskDbRepository taskDbRepository;
     private final TaskDbEntityMapper taskDbEntityMapper;

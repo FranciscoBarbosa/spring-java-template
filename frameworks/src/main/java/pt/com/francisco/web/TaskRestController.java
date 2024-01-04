@@ -1,4 +1,4 @@
-package pt.com.francisco.interfaceAdapters.dataAccess.controllers;
+package pt.com.francisco.web;
 
 import lombok.RequiredArgsConstructor;
 import org.openapi.spring.openapi_yml.api.TaskApi;
@@ -6,32 +6,34 @@ import org.openapi.spring.openapi_yml.api.TasksApi;
 import org.openapitools.model.TaskRequest;
 import org.openapitools.model.TaskResponse;
 import org.springframework.http.ResponseEntity;
-import pt.com.francisco.interfaceAdapters.dataAccess.mappers.taskResponseMapper;
-import pt.com.francisco.useCases.task.TaskInputBoundary;
+import org.springframework.web.bind.annotation.RestController;
+import pt.com.francisco.interfaceAdapters.controllers.TaskController;
+import pt.com.francisco.web.mappers.TaskRequestMapper;
+import pt.com.francisco.web.mappers.TaskResponseMapper;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
+@RestController
 @RequiredArgsConstructor
-public class TaskController implements TaskApi, TasksApi {
-
-    private final TaskInputBoundary taskInputBoundary;
-    private final taskResponseMapper mapper;
-
+public class TaskRestController implements TaskApi, TasksApi {
+    private final TaskController taskController;
+    private final TaskRequestMapper taskRequestMapper;
+    private final TaskResponseMapper taskResponseMapper;
     @Override
     public ResponseEntity<TaskResponse> createNewTask(TaskRequest taskRequest) {
         return ResponseEntity.ok(
-                mapper.mapTaskToTaskResponse
-                (taskInputBoundary
-                    .createTask(mapper.mapTaskRequest(taskRequest))
+                taskResponseMapper.map(
+                    taskController.createNewTask(
+                            taskRequestMapper.map(taskRequest)
+                    )
                 )
         );
     }
 
     @Override
     public ResponseEntity<TaskResponse> getTask(UUID taskId) {
-        return ResponseEntity.ok(mapper.mapTaskToTaskResponse(taskInputBoundary.getTask(taskId)));
+        return null;
     }
 
     @Override
@@ -41,6 +43,6 @@ public class TaskController implements TaskApi, TasksApi {
 
     @Override
     public ResponseEntity<List<TaskResponse>> getAllTasks() {
-        return ResponseEntity.of(Optional.of(taskInputBoundary.getAllTasks().stream().map(mapper::mapTaskToTaskResponse).toList()));
+        return null;
     }
 }
