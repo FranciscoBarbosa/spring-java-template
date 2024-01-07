@@ -1,4 +1,4 @@
-package pt.com.francisco.launchers.springBoot;
+package pt.com.francisco;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

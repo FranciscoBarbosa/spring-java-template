@@ -5,7 +5,7 @@ import pt.com.francisco.entities.Task;
 
 @Mapper(componentModel = "spring")
 public interface TaskDbEntityMapper {
-    public Task toTask(TaskDbEntity taskDbEntity);
+    Task toTask(TaskDbEntity taskDbEntity);
 
-    public TaskDbEntity toTaskDbEntity(Task task);
+    TaskDbEntity toTaskDbEntity(Task task);
 }

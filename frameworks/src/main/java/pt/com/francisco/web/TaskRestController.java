@@ -5,6 +5,7 @@ import org.openapi.spring.openapi_yml.api.TaskApi;
 import org.openapi.spring.openapi_yml.api.TasksApi;
 import org.openapitools.model.TaskRequest;
 import org.openapitools.model.TaskResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import pt.com.francisco.interfaceAdapters.controllers.TaskController;
@@ -22,13 +23,13 @@ public class TaskRestController implements TaskApi, TasksApi {
     private final TaskResponseMapper taskResponseMapper;
     @Override
     public ResponseEntity<TaskResponse> createNewTask(TaskRequest taskRequest) {
-        return ResponseEntity.ok(
-                taskResponseMapper.map(
-                    taskController.createNewTask(
-                            taskRequestMapper.map(taskRequest)
-                    )
+        final TaskResponse createdTask = taskResponseMapper.map(
+                taskController.createNewTask(
+                        taskRequestMapper.map(taskRequest)
                 )
         );
+
+        return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }
 
     @Override
