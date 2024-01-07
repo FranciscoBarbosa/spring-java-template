@@ -1,4 +1,4 @@
-package pt.com.francisco.useCases.task;
+package pt.com.francisco.usecases.task;
 
 import pt.com.francisco.entities.Task;
 import java.util.List;

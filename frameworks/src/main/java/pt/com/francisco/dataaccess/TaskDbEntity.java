@@ -1,4 +1,4 @@
-package pt.com.francisco.dataAccess;
+package pt.com.francisco.dataaccess;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

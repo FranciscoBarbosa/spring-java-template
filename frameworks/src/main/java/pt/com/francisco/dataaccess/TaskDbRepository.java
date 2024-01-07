@@ -1,4 +1,4 @@
-package pt.com.francisco.dataAccess;
+package pt.com.francisco.dataaccess;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

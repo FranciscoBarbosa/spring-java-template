@@ -1,8 +1,8 @@
-package pt.com.francisco.interfaceAdapters.controllers;
+package pt.com.francisco.interfaceadapters.controllers;
 
 import lombok.RequiredArgsConstructor;
 import pt.com.francisco.entities.Task;
-import pt.com.francisco.useCases.task.TaskInputBoundary;
+import pt.com.francisco.usecases.task.TaskInputBoundary;
 
 import java.util.List;
 import java.util.Optional;

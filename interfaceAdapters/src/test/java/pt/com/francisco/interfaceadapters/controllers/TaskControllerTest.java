@@ -1,4 +1,4 @@
-package pt.com.francisco.interfaceAdapters.controllers;
+package pt.com.francisco.interfaceadapters.controllers;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

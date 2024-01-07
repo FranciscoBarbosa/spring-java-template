@@ -1,4 +1,4 @@
-package pt.com.francisco.launchers.springBoot;
+package pt.com.francisco.launchers.springboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

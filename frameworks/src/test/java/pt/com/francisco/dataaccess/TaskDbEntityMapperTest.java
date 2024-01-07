@@ -1,4 +1,4 @@
-package pt.com.francisco.dataAccess;
+package pt.com.francisco.dataaccess;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

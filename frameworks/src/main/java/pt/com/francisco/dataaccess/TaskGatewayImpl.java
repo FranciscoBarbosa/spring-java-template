@@ -1,10 +1,9 @@
-package pt.com.francisco.dataAccess;
+package pt.com.francisco.dataaccess;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import pt.com.francisco.entities.Task;
-import pt.com.francisco.useCases.task.TaskGateway;
+import pt.com.francisco.usecases.task.TaskGateway;
 
 import java.util.List;
 import java.util.Optional;

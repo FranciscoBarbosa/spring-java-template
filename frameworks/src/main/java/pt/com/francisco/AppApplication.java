@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = {
 		"pt.com.francisco.web",
 		"pt.com.francisco.launchers",
-		"pt.com.francisco.dataAccess"
+		"pt.com.francisco.dataaccess"
 })
-@EnableJpaRepositories(basePackages = "pt.com.francisco.dataAccess")
+@EnableJpaRepositories(basePackages = "pt.com.francisco.dataaccess")
 @EntityScan(basePackages = "pt.com.francisco.dataAccess")
 public class AppApplication {
 	public static void main(String[] args) {

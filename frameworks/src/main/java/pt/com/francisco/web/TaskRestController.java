@@ -8,7 +8,7 @@ import org.openapitools.model.TaskResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-import pt.com.francisco.interfaceAdapters.controllers.TaskController;
+import pt.com.francisco.interfaceadapters.controllers.TaskController;
 import pt.com.francisco.web.mappers.TaskRequestMapper;
 import pt.com.francisco.web.mappers.TaskResponseMapper;
 

@@ -1,4 +1,4 @@
-package pt.com.francisco.useCases.task;
+package pt.com.francisco.usecases.task;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
