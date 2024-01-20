@@ -7,6 +7,7 @@ import org.openapitools.model.TaskRequest;
 import org.openapitools.model.TaskResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import pt.com.francisco.interfaceadapters.controllers.TaskController;
 import pt.com.francisco.web.mappers.TaskRequestMapper;
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin
 public class TaskRestController implements TaskApi, TasksApi {
     private final TaskController taskController;
     private final TaskRequestMapper taskRequestMapper;
