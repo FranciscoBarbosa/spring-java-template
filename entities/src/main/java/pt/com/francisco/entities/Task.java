@@ -1,5 +1,6 @@
 package pt.com.francisco.entities;
 
+import lombok.NonNull;
 import pt.com.francisco.entities.exceptions.TaskException;
 import lombok.Data;
 
@@ -9,8 +10,11 @@ import java.util.UUID;
 @Data
 public class Task {
     private UUID id; //using long might expose other resources by increasing id for example getBy/1, getBy/2
+    @NonNull
     private String name;
+    @NonNull
     private String description;
+    @NonNull
     private Status status;
     private LocalDateTime startDate;
     private LocalDateTime finishedDate;
@@ -75,4 +79,10 @@ public class Task {
         status = Status.FINISHED;
         finishedDate = LocalDateTime.now();
     }
+
+//    public void setName(String name){
+//        if(name == null){
+//            throw new TaskException("task name can't be null");
+//        }
+//    }
 }

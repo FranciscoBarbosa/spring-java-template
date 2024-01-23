@@ -27,7 +27,7 @@ class TaskRestControllerIT {
         RestAssured.port = port;
     }
     @Test
-    void shouldGetTask(){
+    void shouldCreateTask(){
         Header contentTypeJson = new Header("content-type", "application/json");
 
         final TaskRequest taskRequest = new TaskRequest();
@@ -47,6 +47,24 @@ class TaskRestControllerIT {
                         .body("name", is(taskRequest.getName()),
                                 "description", is(taskRequest.getDescription()),
                                         "status", is(taskRequest.getStatus().getValue()));
+    }
+
+    @Test
+    void shouldNotCreateTaskWithInvalidModel(){
+        Header contentTypeJson = new Header("content-type", "application/json");
+
+        final InvalidTaskRequest invalidTaskRequest = new InvalidTaskRequest();
+        invalidTaskRequest.setInvalidName("invalid name");
+        invalidTaskRequest.setInvalidDescription("test invalid request model");
+        invalidTaskRequest.setInvalidStatus("invalid status");
+
+        final String taskRequestJson = mapToJson(invalidTaskRequest);
+
+        given().body(taskRequestJson).header(contentTypeJson)
+                .when().post("/task")
+                .then()
+                .assertThat()
+                .statusCode(400);
     }
 
     @SneakyThrows

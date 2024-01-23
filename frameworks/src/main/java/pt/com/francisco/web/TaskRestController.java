@@ -25,18 +25,23 @@ public class TaskRestController implements TaskApi, TasksApi {
     private final TaskResponseMapper taskResponseMapper;
     @Override
     public ResponseEntity<TaskResponse> createNewTask(TaskRequest taskRequest) {
-        final TaskResponse createdTask = taskResponseMapper.map(
+        TaskResponse createdTask;
+        try{
+            createdTask = taskResponseMapper.map(
                 taskController.createNewTask(
                         taskRequestMapper.map(taskRequest)
                 )
-        );
-
-        return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
+            );
+            return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
+        } catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Override
     public ResponseEntity<TaskResponse> getTask(UUID taskId) {
-        return null;
+        final TaskResponse task = taskResponseMapper.map(taskController.getTask(taskId));
+        return new ResponseEntity<>(task, HttpStatus.OK);
     }
 
     @Override
