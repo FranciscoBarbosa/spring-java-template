@@ -12,6 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TaskTest {
     @Test
+    void shouldCreateDefaultTaskWithId(){
+        final var task = new Task();
+        Assertions.assertThat(task.getId()).isNotNull();
+    }
+
+    @Test
     void shouldCreateNotStartedTask(){
         final var task = new Task(
                 "Buy Christmas gifts",

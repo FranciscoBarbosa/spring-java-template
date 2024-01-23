@@ -21,7 +21,7 @@ public class Task {
 
     //TODO: replace these constructors by builder
     public Task(){
-
+        this.id = UUID.randomUUID();
     }
 
     public Task(String name, String description, Status status) {

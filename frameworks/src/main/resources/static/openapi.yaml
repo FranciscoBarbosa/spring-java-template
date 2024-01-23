@@ -21,10 +21,10 @@ paths:
                     application/json:
                         schema:
                             $ref: '#/components/schemas/taskRequest'
-    /task/{taskId}:
+    /task/{id}:
         parameters:
             - in: path
-              name: taskId
+              name: id
               required: true
               schema:
                   type: string
@@ -90,6 +90,9 @@ components:
         taskResponse:
             type: object
             properties:
+                id:
+                    type: string
+                    format: uuid
                 name:
                     type: string
                 description:
