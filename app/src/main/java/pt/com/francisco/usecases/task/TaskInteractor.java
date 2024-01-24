@@ -17,18 +17,15 @@ public class TaskInteractor implements TaskInputBoundary {
 
     @Override
     public void updateTask(Task task) {
-        throwExceptionIfNotExistentTask(task.getId());
         taskGateway.update(task);
     }
     @Override
     public void completeTask(UUID id) {
-        throwExceptionIfNotExistentTask(id);
         final Task task = taskGateway.get(id).get();
         task.complete();
     }
     @Override
     public Task getTask(UUID id) {
-        throwExceptionIfNotExistentTask(id);
         return taskGateway.get(id).get();
     }
 
@@ -39,13 +36,6 @@ public class TaskInteractor implements TaskInputBoundary {
 
     @Override
     public void removeTask(UUID id) {
-        throwExceptionIfNotExistentTask(id);
         taskGateway.delete(id);
-    }
-
-    private void throwExceptionIfNotExistentTask(UUID id){
-        if(taskGateway.get(id).isEmpty() ){
-            throw new TaskNotFoundException();
-        }
     }
 }

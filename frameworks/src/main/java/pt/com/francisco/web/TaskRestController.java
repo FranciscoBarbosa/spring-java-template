@@ -14,6 +14,7 @@ import pt.com.francisco.web.mappers.TaskRequestMapper;
 import pt.com.francisco.web.mappers.TaskResponseMapper;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @RestController
@@ -40,8 +41,13 @@ public class TaskRestController implements TaskApi, TasksApi {
 
     @Override
     public ResponseEntity<TaskResponse> getTask(UUID taskId) {
-        final TaskResponse task = taskResponseMapper.map(taskController.getTask(taskId));
-        return new ResponseEntity<>(task, HttpStatus.OK);
+        try{
+            final TaskResponse task = taskResponseMapper.map(taskController.getTask(taskId));
+            return new ResponseEntity<>(task, HttpStatus.OK);
+        }
+        catch(NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override

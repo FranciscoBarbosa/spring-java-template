@@ -79,11 +79,20 @@ class TaskRestControllerIT {
             .assertThat()
             .statusCode(201).extract().as(Task.class).getId();
 
-        given().body(taskRequestJson)//.header(contentTypeJson)
-                .when().get("/task/" + taskId)
+        given().when().get("/task/" + taskId)
                 .then()
                 .assertThat()
                 .statusCode(200);
+    }
+
+    @Test
+    void shouldNotGetInexistentTask(){
+        UUID taskId = UUID.randomUUID();
+
+        given().when().get("/task/" + taskId)
+                .then()
+                .assertThat()
+                .statusCode(404);
     }
 
     @SneakyThrows
