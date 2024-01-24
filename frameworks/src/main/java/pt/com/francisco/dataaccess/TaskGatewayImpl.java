@@ -26,9 +26,15 @@ public class TaskGatewayImpl implements TaskGateway {
     }
 
     @Override
-    public Task update(Task task) {
-        TaskDbEntity taskDbEntity = taskDbRepository.findById(task.getId()).get();
-        return taskDbEntityMapper.toTask(taskDbRepository.save(taskDbEntity));
+    public Task update(UUID taskId, Task task) {
+        if(taskDbRepository.findById(taskId).isPresent()){
+            TaskDbEntity taskDbEntity = taskDbRepository.findById(taskId).get();
+            recreateTask(taskDbEntity, taskId, task);
+            return taskDbEntityMapper.toTask(taskDbEntity);
+        }
+        else {
+            return create(task);
+        }
     }
 
     @Override
@@ -43,5 +49,16 @@ public class TaskGatewayImpl implements TaskGateway {
                 .stream()
                 .map(taskDbEntityMapper::toTask)
                 .toList();
+    }
+
+    private void recreateTask(TaskDbEntity taskDbEntity,UUID taskId, Task task){
+        taskDbEntity.setId(taskId);
+        taskDbEntity.setName(task.getName());
+        taskDbEntity.setStatus(task.getStatus());
+        taskDbEntity.setDescription(task.getDescription());
+        taskDbEntity.setStartDate(task.getStartDate());
+        taskDbEntity.setFinishedDate(task.getFinishedDate());
+
+        taskDbRepository.save((taskDbEntity));
     }
 }

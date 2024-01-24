@@ -13,6 +13,7 @@ import org.openapitools.model.TaskRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import pt.com.francisco.entities.Status;
 import pt.com.francisco.entities.Task;
 
 import java.util.UUID;
@@ -47,9 +48,9 @@ class TaskRestControllerIT {
                         .statusCode(201)
                     .and()
                         .contentType(ContentType.JSON)
-                        .body("name", is(taskRequest.getName()),
-                                "description", is(taskRequest.getDescription()),
-                                        "status", is(taskRequest.getStatus().getValue()));
+                        .body("name", is("IntegrationTest"),
+                                "description", is("test the task creation flow"),
+                                        "status", is(Status.NOT_STARTED.getValue()));
     }
 
     @Test
@@ -93,6 +94,44 @@ class TaskRestControllerIT {
                 .then()
                 .assertThat()
                 .statusCode(404);
+    }
+
+    @Test
+    void shouldUpdateNewTask(){
+        TaskRequest taskRequest = createTaskRequest();
+        String taskRequestJson = mapToJson(taskRequest);
+        UUID taskId = UUID.randomUUID();
+
+        given().body(taskRequestJson).header(contentTypeJson)
+                .when().put("/task/"+taskId)
+                .then()
+                .assertThat()
+                .statusCode(201);
+    }
+
+    @Test
+    void shouldUpdateExistentTask(){
+        TaskRequest taskRequest = createTaskRequest();
+        String taskRequestJson = mapToJson(taskRequest);
+
+        UUID taskId = given().body(taskRequestJson)
+                .header(contentTypeJson)
+                .when().post("/task").then()
+                .assertThat()
+                .statusCode(201).extract().as(Task.class).getId();
+
+        taskRequest.setName("new name");
+        String taskRequestUpdatedJson = mapToJson(taskRequest);
+
+        given().body(taskRequestUpdatedJson).header(contentTypeJson)
+                .when().put("/task/"+taskId)
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and()
+                .contentType(ContentType.JSON)
+                .body("name", is("new name"),
+                        "id", is(taskId.toString()));
     }
 
     @SneakyThrows

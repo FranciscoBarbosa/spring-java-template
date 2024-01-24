@@ -16,8 +16,8 @@ public class TaskInteractor implements TaskInputBoundary {
     }
 
     @Override
-    public void updateTask(Task task) {
-        taskGateway.update(task);
+    public Task updateTask(UUID taskId, Task task) {
+        return taskGateway.update(taskId, task);
     }
     @Override
     public void completeTask(UUID id) {

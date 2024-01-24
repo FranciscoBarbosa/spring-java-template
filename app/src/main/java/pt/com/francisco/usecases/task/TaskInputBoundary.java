@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public interface TaskInputBoundary {
     Task createTask(Task task);
-    void updateTask(Task task);
+    Task updateTask(UUID taskId,Task task);
     void removeTask(UUID id);
     void completeTask(UUID id);
     Task getTask(UUID id);

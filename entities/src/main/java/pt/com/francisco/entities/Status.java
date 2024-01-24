@@ -18,7 +18,7 @@ public enum Status {
     }
 
     @JsonValue
-    String getValue(){
+    public String getValue(){
         return this.value;
     }
     @JsonCreator

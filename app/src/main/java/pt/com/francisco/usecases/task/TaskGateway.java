@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface TaskGateway {
         Task create(Task task);
         Optional<Task> get(UUID id);
-        Task update(Task task);
+        Task update(UUID taskId, Task task);
         void delete(UUID id);
         List<Task> getAll();
 }

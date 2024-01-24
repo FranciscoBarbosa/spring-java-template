@@ -20,15 +20,15 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
+//TODO: check api @ApiResponse codes for each endpoint
 public class TaskRestController implements TaskApi, TasksApi {
     private final TaskController taskController;
     private final TaskRequestMapper taskRequestMapper;
     private final TaskResponseMapper taskResponseMapper;
     @Override
     public ResponseEntity<TaskResponse> createNewTask(TaskRequest taskRequest) {
-        TaskResponse createdTask;
         try{
-            createdTask = taskResponseMapper.map(
+            TaskResponse createdTask = taskResponseMapper.map(
                 taskController.createNewTask(
                         taskRequestMapper.map(taskRequest)
                 )
@@ -50,9 +50,17 @@ public class TaskRestController implements TaskApi, TasksApi {
         }
     }
 
+    // TODO: check if patch or put
     @Override
     public ResponseEntity<TaskResponse> updateTask(UUID taskId, TaskRequest taskRequest) {
-        return null;
+        final TaskResponse taskResponse = taskResponseMapper.map(
+                taskController
+                        .updateTask(taskId, taskRequestMapper.map(taskRequest)));
+
+        if(taskResponse.getId().equals(taskId)){
+            return new ResponseEntity<>(taskResponse, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(taskResponse, HttpStatus.CREATED);
     }
 
     @Override

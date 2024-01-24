@@ -20,8 +20,8 @@ public class TaskController {
         return taskInputBoundary.getTask(taskId);
     }
 
-    public Task updateTask(UUID taskId, Task task) {
-        return null;
+    public Task updateTask(UUID taskId,Task task) {
+        return taskInputBoundary.updateTask(taskId,task);
     }
 
     public Optional<List<Task>> getAllTasks() {
