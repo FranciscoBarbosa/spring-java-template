@@ -13,6 +13,7 @@ import pt.com.francisco.interfaceadapters.controllers.TaskController;
 import pt.com.francisco.web.mappers.TaskRequestMapper;
 import pt.com.francisco.web.mappers.TaskResponseMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -39,6 +40,7 @@ public class TaskRestController implements TaskApi, TasksApi {
         }
     }
 
+    //TODO: check this exception returned, should we have a custom one?
     @Override
     public ResponseEntity<TaskResponse> getTask(UUID taskId) {
         try{
@@ -65,6 +67,8 @@ public class TaskRestController implements TaskApi, TasksApi {
 
     @Override
     public ResponseEntity<List<TaskResponse>> getAllTasks() {
-        return null;
+        List<TaskResponse> taskResponseList = new ArrayList<>();
+        taskController.getAllTasks().get().forEach(task -> taskResponseList.add(taskResponseMapper.map(task)));
+        return new ResponseEntity<>(taskResponseList, HttpStatus.OK);
     }
 }

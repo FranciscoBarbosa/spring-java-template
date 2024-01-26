@@ -13,6 +13,7 @@ import org.openapitools.model.TaskRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.annotation.DirtiesContext;
 import pt.com.francisco.entities.Status;
 import pt.com.francisco.entities.Task;
 
@@ -22,6 +23,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 class TaskRestControllerIT {
     @LocalServerPort
     int port;
@@ -132,6 +134,50 @@ class TaskRestControllerIT {
                 .contentType(ContentType.JSON)
                 .body("name", is("new name"),
                         "id", is(taskId.toString()));
+    }
+
+    @Test
+    void shouldGetNoTasks(){
+
+        given().header(contentTypeJson)
+                .when().get("/tasks")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and()
+                .contentType(ContentType.JSON)
+                .body("size()", is(0));
+    }
+
+    @Test
+    void shouldGetTwoTasks(){
+        TaskRequest taskRequest = createTaskRequest();
+        String taskRequestJson = mapToJson(taskRequest);
+
+        given().body(taskRequestJson)
+                .header(contentTypeJson)
+                .when().post("/task").then()
+                .assertThat()
+                .statusCode(201);
+
+        TaskRequest secondTaskRequest = createTaskRequest();
+        String secondTaskRequestJson = mapToJson(secondTaskRequest);
+
+        given().body(secondTaskRequestJson)
+                .header(contentTypeJson)
+                .when().post("/task").then()
+                .assertThat()
+                .statusCode(201);
+
+
+        given().header(contentTypeJson)
+                .when().get("/tasks")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .and()
+                .contentType(ContentType.JSON)
+                .body("size()", is(2));
     }
 
     @SneakyThrows
