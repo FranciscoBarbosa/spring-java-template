@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 		"pt.com.francisco.dataaccess"
 })
 @EnableJpaRepositories(basePackages = "pt.com.francisco.dataaccess")
-@EntityScan(basePackages = "pt.com.francisco.dataAccess")
+@EntityScan(basePackages = "pt.com.francisco.dataaccess")
 public class AppApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AppApplication.class, args);
