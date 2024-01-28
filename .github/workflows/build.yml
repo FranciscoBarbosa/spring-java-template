@@ -1,5 +1,5 @@
 
-name: Build with Maven
+name: Build
 
 on:
   push:
@@ -24,8 +24,17 @@ jobs:
         run: mvn clean install -DskipTests
       - name: Unit Tests
         run: mvn jacoco:prepare-agent surefire:test
+        #with:
+          #paths: ${{ github.workspace }}/**/site/jacoco/*
       - name: Integration Tests
         run: mvn jacoco:prepare-agent-integration failsafe:integration-test
+#      - name: Upload Integration Tests
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: integration tests artifacts
+#          path: |
+#            /**/target/jacoco-it.exec
+#            /**/target/failsafe-reports
       - name: Unit Test Coverage
         run: mvn jacoco:report
       - name: Integration Test Coverage
