@@ -24,7 +24,7 @@ import static org.hamcrest.Matchers.is;
 
 @SpringBootTest(webEnvironment= SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-class TaskRestControllerIT {
+class TaskRestControllerTestIT {
     @LocalServerPort
     int port;
     @Autowired
