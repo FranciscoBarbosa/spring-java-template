@@ -40,10 +40,10 @@ jobs:
           coverage_report_title: JaCoCo
           skip_check_run: false
           minimum_coverage: 50
-#      - name: Upload Code Coverage Artifacts
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: code-coverage-report
-#          path: ${{ github.workspace }}/**/target/site/jacoco/
-#          retention-days: 1
+      - name: Upload Code Coverage Artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage-report
+          path: ${{ github.workspace }}/reportAggregate/target/site/jacoco-aggregate/
+          retention-days: 1
 
