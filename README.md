@@ -1,5 +1,7 @@
 # Spring Java Template
 
+![](https://github.com/FranciscoBarbosa/spring-java-template/blob/main/.github/badges/jacoco.svg)
+
 This repository contains a template project with some of the best practices for developing a java application with Spring Boot. The use case is a simple **To Do** list applying all the techniques and tools specified below.
 
 ## Keywords: 
