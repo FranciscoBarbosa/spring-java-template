@@ -1,8 +1,0 @@
-.openapi-generator-ignore
-README.md
-pom.xml
-src/main/java/org/openapi/spring/openapi_yml/api/ApiUtil.java
-src/main/java/org/openapi/spring/openapi_yml/api/TaskApi.java
-src/main/java/org/openapi/spring/openapi_yml/api/TasksApi.java
-src/main/java/org/openapitools/model/TaskRequest.java
-src/main/java/org/openapitools/model/TaskResponse.java

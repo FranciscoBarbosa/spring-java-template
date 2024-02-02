@@ -90,7 +90,10 @@
             <version>5.4.0</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.tngtech.archunit</groupId>
+            <artifactId>archunit-junit5</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -135,6 +138,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.societegenerale.commons</groupId>
+                <artifactId>arch-unit-maven-plugin</artifactId>
+                <version>4.0.0</version>
             </plugin>
         </plugins>
     </build>

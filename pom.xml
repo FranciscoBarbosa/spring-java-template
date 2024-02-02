@@ -35,6 +35,7 @@
 		<spring-boot-starter-web.version>3.2.0</spring-boot-starter-web.version>
 		<org.mapstruct.version>1.6.0.Beta1</org.mapstruct.version>
 		<spring-data-starter-data-jpa.version>3.2.1</spring-data-starter-data-jpa.version>
+		<spotless.version>2.43.0</spotless.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -100,6 +101,12 @@
 				<artifactId>mapstruct</artifactId>
 				<version>${org.mapstruct.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.tngtech.archunit</groupId>
+				<artifactId>archunit-junit5</artifactId>
+				<version>1.2.1</version>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -114,6 +121,11 @@
 					<groupId>org.jacoco</groupId>
 					<artifactId>jacoco-maven-plugin</artifactId>
 					<version>0.8.11</version>
+				</plugin>
+				<plugin>
+					<groupId>com.societegenerale.commons</groupId>
+					<artifactId>arch-unit-maven-plugin</artifactId>
+					<version>4.0.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -133,6 +145,18 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.8.11</version>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>com.diffplug.spotless</groupId>-->
+<!--				<artifactId>spotless-maven-plugin</artifactId>-->
+<!--				<version>${spotless.version}</version>-->
+<!--				<configuration>-->
+<!--					<java>-->
+<!--						<googleJavaFormat>-->
+<!--							<version>1.10.0</version>-->
+<!--						</googleJavaFormat>-->
+<!--					</java>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
