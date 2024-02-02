@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>TaskInteractor.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">interfaceAdapters</a> &gt; <a href="../index.html" class="el_bundle">app</a> &gt; <a href="index.source.html" class="el_package">pt.com.francisco.usecases.task</a> &gt; <span class="el_source">TaskInteractor.java</span></div><h1>TaskInteractor.java</h1><pre class="source lang-java linenums">package pt.com.francisco.usecases.task;
+
+import pt.com.francisco.entities.Task;
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+import java.util.UUID;
+
+<span class="fc" id="L9">@RequiredArgsConstructor</span>
+public class TaskInteractor implements TaskInputBoundary {
+    private final TaskGateway taskGateway;
+
+    @Override
+    public Task createTask(Task task) {
+<span class="fc" id="L15">        return taskGateway.create(task);</span>
+    }
+
+    @Override
+    public Task updateTask(UUID taskId, Task task) {
+<span class="nc" id="L20">        return taskGateway.update(taskId, task);</span>
+    }
+    @Override
+    public void completeTask(UUID id) {
+<span class="nc" id="L24">        final Task task = taskGateway.get(id).get();</span>
+<span class="nc" id="L25">        task.complete();</span>
+<span class="nc" id="L26">    }</span>
+    @Override
+    public Task getTask(UUID id) {
+<span class="nc" id="L29">        return taskGateway.get(id).get();</span>
+    }
+
+    @Override
+    public List&lt;Task&gt; getAllTasks() {
+<span class="nc" id="L34">        return taskGateway.getAll();</span>
+    }
+
+    @Override
+    public void removeTask(UUID id) {
+<span class="nc" id="L39">        taskGateway.delete(id);</span>
+<span class="nc" id="L40">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

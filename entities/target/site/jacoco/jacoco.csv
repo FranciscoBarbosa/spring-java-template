@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+entities,pt.com.francisco.entities,Task,290,140,64,16,4,47,44,18,10,12
+entities,pt.com.francisco.entities,Status,30,32,4,0,6,7,4,2,2,2
+entities,pt.com.francisco.entities.exceptions,TaskException,0,4,0,0,0,2,0,1,0,1

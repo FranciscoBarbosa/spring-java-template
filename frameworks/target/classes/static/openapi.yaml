@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: To Do list App
+  version: 1.0.0
+paths:
+    /task:
+        post:
+            description: create a new task
+            operationId: createNewTask
+            responses:
+                '201':
+                    description: Task created successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/taskResponse'
+                default:
+                    description: Unexpected error
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/taskRequest'
+    /task/{id}:
+        parameters:
+            - in: path
+              name: id
+              required: true
+              schema:
+                  type: string
+                  format: uuid
+        get:
+            description: returns a single task from the system
+            operationId: getTask
+            responses:
+                '200':
+                    description: Task response
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/taskResponse'
+                '400':
+                    description: Invalid request
+                default:
+                    description: Unexpected error
+        put:
+            description: change task status
+            operationId: updateTask
+            responses:
+                '201':
+                    description: Task created successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/taskResponse'
+                '204':
+                    description: Task updated successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/taskResponse'
+                '400':
+                    description: Invalid request
+                default:
+                    description: Unexpected error
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/taskRequest'
+    /tasks:
+        get:
+            description: returns all tasks from the system
+            operationId: getAllTasks
+            responses:
+                '200':
+                    description: A list of tasks
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/taskResponse'
+                '400':
+                    description: Invalid request
+                default:
+                    description: Unexpected error
+
+components:
+    schemas:
+        taskResponse:
+            type: object
+            properties:
+                id:
+                    type: string
+                    format: uuid
+                name:
+                    type: string
+                description:
+                    type: string
+                status:
+                    type: string
+                    enum:
+                        - finished
+                        - doing
+                        - not_started
+                startDate:
+                    type: string
+                finishedDate:
+                    type: string
+        taskRequest:
+            type: object
+            properties:
+                name:
+                    type: string
+                description:
+                    type: string
+                status:
+                    type: string
+                    enum:
+                        - finished
+                        - doing
+                        - not_started

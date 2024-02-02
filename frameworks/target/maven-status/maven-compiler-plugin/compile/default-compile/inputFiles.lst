@@ -1,0 +1,15 @@
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/launchers/springboot/configuration/InterfaceAdapters.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/web/mappers/TaskResponseMapper.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/target/generated-sources/openapi/src/main/java/org/openapi/spring/openapi_yml/api/TasksApi.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/target/generated-sources/openapi/src/main/java/org/openapi/spring/openapi_yml/api/TaskApi.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/web/TaskRestController.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/target/generated-sources/openapi/src/main/java/org/openapi/spring/openapi_yml/api/ApiUtil.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/target/generated-sources/openapi/src/main/java/org/openapitools/model/TaskRequest.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/dataaccess/TaskDbRepository.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/dataaccess/TaskDbEntity.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/dataaccess/TaskDbEntityMapper.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/dataaccess/TaskGatewayImpl.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/web/mappers/TaskRequestMapper.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/AppApplication.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/src/main/java/pt/com/francisco/launchers/springboot/configuration/UseCases.java
+/home/runner/work/spring-java-template/spring-java-template/frameworks/target/generated-sources/openapi/src/main/java/org/openapitools/model/TaskResponse.java
