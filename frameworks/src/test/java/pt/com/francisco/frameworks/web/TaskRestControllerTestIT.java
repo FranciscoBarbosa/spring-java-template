@@ -1,4 +1,4 @@
-package pt.com.francisco.web;
+package pt.com.francisco.frameworks.web;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;

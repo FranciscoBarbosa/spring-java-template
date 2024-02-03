@@ -1,4 +1,4 @@
-package pt.com.francisco.dataaccess;
+package pt.com.francisco.frameworks.dataaccess;
 
 import org.mapstruct.Mapper;
 import pt.com.francisco.entities.Task;

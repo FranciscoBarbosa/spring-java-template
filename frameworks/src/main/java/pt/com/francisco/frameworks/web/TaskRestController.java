@@ -1,4 +1,4 @@
-package pt.com.francisco.web;
+package pt.com.francisco.frameworks.web;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+import pt.com.francisco.frameworks.web.mappers.TaskRequestMapper;
+import pt.com.francisco.frameworks.web.mappers.TaskResponseMapper;
 import pt.com.francisco.interfaceadapters.controllers.TaskController;
-import pt.com.francisco.web.mappers.TaskRequestMapper;
-import pt.com.francisco.web.mappers.TaskResponseMapper;
 
 @RestController
 @RequiredArgsConstructor

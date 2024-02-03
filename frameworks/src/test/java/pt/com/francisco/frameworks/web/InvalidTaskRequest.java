@@ -1,4 +1,4 @@
-package pt.com.francisco.web;
+package pt.com.francisco.frameworks.web;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package pt.com.francisco.web.mappers;
+package pt.com.francisco.frameworks.web.mappers;
 
 import org.mapstruct.Mapper;
 import org.openapitools.model.TaskRequest;
