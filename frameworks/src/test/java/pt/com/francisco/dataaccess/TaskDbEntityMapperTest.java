@@ -7,8 +7,9 @@ import pt.com.francisco.entities.Task;
 
 class TaskDbEntityMapperTest {
     TaskDbEntityMapper taskDbEntityMapper = new TaskDbEntityMapperImpl();
+
     @Test
-    void shouldMaptoTaskDbEntity(){
+    void shouldMaptoTaskDbEntity() {
         final var task = new Task("name", "description", Status.NOT_STARTED);
         TaskDbEntity taskDbEntity = taskDbEntityMapper.toTaskDbEntity(task);
 

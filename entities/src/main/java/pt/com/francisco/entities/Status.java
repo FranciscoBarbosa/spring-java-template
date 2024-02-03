@@ -1,10 +1,10 @@
 package pt.com.francisco.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-//@JsonFormat(shape = JsonFormat.Shape.OBJECT) //TODO: can i do this? I need this to create a Task from a json string
+// @JsonFormat(shape = JsonFormat.Shape.OBJECT) //TODO: can i do this? I need this to create a Task
+// from a json string
 // and to be able to  serialize status string to the enum
 public enum Status {
     FINISHED("finished"),
@@ -18,12 +18,13 @@ public enum Status {
     }
 
     @JsonValue
-    public String getValue(){
+    public String getValue() {
         return this.value;
     }
+
     @JsonCreator
     public static Status create(String val) {
-        Status [] statuses = Status.values();
+        Status[] statuses = Status.values();
         for (Status status : statuses) {
             if (status.getValue().equals(val)) {
                 return status;
@@ -31,5 +32,4 @@ public enum Status {
         }
         return NOT_STARTED;
     }
-
 }

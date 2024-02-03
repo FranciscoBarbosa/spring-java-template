@@ -9,7 +9,7 @@ import pt.com.francisco.usecases.task.TaskInteractor;
 @Configuration
 public class UseCases {
     @Bean
-    TaskInputBoundary taskInputBoundary(TaskGateway taskGateway){
+    TaskInputBoundary taskInputBoundary(TaskGateway taskGateway) {
         return new TaskInteractor(taskGateway);
     }
 }

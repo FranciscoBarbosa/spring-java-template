@@ -9,7 +9,7 @@ import pt.com.francisco.usecases.task.TaskInputBoundary;
 public class InterfaceAdapters {
 
     @Bean
-    TaskController taskController(TaskInputBoundary taskInputBoundary){
+    TaskController taskController(TaskInputBoundary taskInputBoundary) {
         return new TaskController(taskInputBoundary);
     }
 }

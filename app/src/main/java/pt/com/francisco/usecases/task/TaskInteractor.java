@@ -1,10 +1,9 @@
 package pt.com.francisco.usecases.task;
 
-import pt.com.francisco.entities.Task;
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import pt.com.francisco.entities.Task;
 
 @RequiredArgsConstructor
 public class TaskInteractor implements TaskInputBoundary {
@@ -19,11 +18,13 @@ public class TaskInteractor implements TaskInputBoundary {
     public Task updateTask(UUID taskId, Task task) {
         return taskGateway.update(taskId, task);
     }
+
     @Override
     public void completeTask(UUID id) {
         final Task task = taskGateway.get(id).get();
         task.complete();
     }
+
     @Override
     public Task getTask(UUID id) {
         return taskGateway.get(id).get();

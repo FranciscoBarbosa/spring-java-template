@@ -1,12 +1,11 @@
 package pt.com.francisco.interfaceadapters.controllers;
 
-import lombok.RequiredArgsConstructor;
-import pt.com.francisco.entities.Task;
-import pt.com.francisco.usecases.task.TaskInputBoundary;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import pt.com.francisco.entities.Task;
+import pt.com.francisco.usecases.task.TaskInputBoundary;
 
 @RequiredArgsConstructor
 public class TaskController {
@@ -20,8 +19,8 @@ public class TaskController {
         return taskInputBoundary.getTask(taskId);
     }
 
-    public Task updateTask(UUID taskId,Task task) {
-        return taskInputBoundary.updateTask(taskId,task);
+    public Task updateTask(UUID taskId, Task task) {
+        return taskInputBoundary.updateTask(taskId, task);
     }
 
     public Optional<List<Task>> getAllTasks() {

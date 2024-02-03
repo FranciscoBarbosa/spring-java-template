@@ -1,23 +1,24 @@
 package pt.com.francisco.dataaccess;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import pt.com.francisco.entities.Task;
-import pt.com.francisco.usecases.task.TaskGateway;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.StreamSupport;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+import pt.com.francisco.entities.Task;
+import pt.com.francisco.usecases.task.TaskGateway;
 
 @RequiredArgsConstructor
 @Component
 public class TaskGatewayImpl implements TaskGateway {
     private final TaskDbRepository taskDbRepository;
     private final TaskDbEntityMapper taskDbEntityMapper;
+
     @Override
     public Task create(Task task) {
-        return taskDbEntityMapper.toTask(taskDbRepository.save(taskDbEntityMapper.toTaskDbEntity(task)));
+        return taskDbEntityMapper.toTask(
+                taskDbRepository.save(taskDbEntityMapper.toTaskDbEntity(task)));
     }
 
     @Override
@@ -27,12 +28,11 @@ public class TaskGatewayImpl implements TaskGateway {
 
     @Override
     public Task update(UUID taskId, Task task) {
-        if(taskDbRepository.findById(taskId).isPresent()){
+        if (taskDbRepository.findById(taskId).isPresent()) {
             TaskDbEntity taskDbEntity = taskDbRepository.findById(taskId).get();
             recreateTask(taskDbEntity, taskId, task);
             return taskDbEntityMapper.toTask(taskDbEntity);
-        }
-        else {
+        } else {
             return create(task);
         }
     }
@@ -51,7 +51,7 @@ public class TaskGatewayImpl implements TaskGateway {
                 .toList();
     }
 
-    private void recreateTask(TaskDbEntity taskDbEntity,UUID taskId, Task task){
+    private void recreateTask(TaskDbEntity taskDbEntity, UUID taskId, Task task) {
         taskDbEntity.setId(taskId);
         taskDbEntity.setName(task.getName());
         taskDbEntity.setStatus(task.getStatus());

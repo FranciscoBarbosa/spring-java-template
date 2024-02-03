@@ -10,19 +10,17 @@ import pt.com.francisco.entities.Task;
 
 @ExtendWith(MockitoExtension.class)
 class TaskInteractorTest {
-    @Mock
-    private Task task;
-    @Mock
-    private TaskGateway taskGateway;
+    @Mock private Task task;
+    @Mock private TaskGateway taskGateway;
     private TaskInputBoundary taskInputBoundary;
 
     @BeforeEach
-    void setup(){
+    void setup() {
         taskInputBoundary = new TaskInteractor(taskGateway);
     }
 
     @Test
-    void shouldCreateTask(){
+    void shouldCreateTask() {
         Mockito.when(taskGateway.create(task)).thenReturn(task);
 
         taskInputBoundary.createTask(task);

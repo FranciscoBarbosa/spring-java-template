@@ -1,10 +1,9 @@
 package pt.com.francisco.dataaccess;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TaskDbRepository extends CrudRepository<TaskDbEntity, UUID> {
@@ -16,6 +15,4 @@ public interface TaskDbRepository extends CrudRepository<TaskDbEntity, UUID> {
 
     @Override
     public Iterable<TaskDbEntity> findAll();
-
-
 }
