@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.StreamSupport;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import pt.com.francisco.entities.Task;
 import pt.com.francisco.usecases.task.TaskGateway;
@@ -22,6 +23,7 @@ public class TaskGatewayImpl implements TaskGateway {
     }
 
     @Override
+    @Cacheable("tasks")
     public Optional<Task> get(UUID id) {
         return Optional.ofNullable(taskDbEntityMapper.toTask(taskDbRepository.findById(id).get()));
     }

@@ -36,9 +36,15 @@
 		<org.mapstruct.version>1.6.0.Beta1</org.mapstruct.version>
 		<spring-data-starter-data-jpa.version>3.2.1</spring-data-starter-data-jpa.version>
 		<spotless.version>2.43.0</spotless.version>
+		<spring-boot-starter-cache.version>2.4.0</spring-boot-starter-cache.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-cache</artifactId>
+				<version>${spring-boot-starter-cache.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-web</artifactId>
