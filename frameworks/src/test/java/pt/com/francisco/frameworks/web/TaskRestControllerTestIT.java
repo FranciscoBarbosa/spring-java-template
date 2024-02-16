@@ -41,7 +41,9 @@ class TaskRestControllerTestIT {
         TaskRequest taskRequest = createTaskRequest();
         String taskRequestJson = mapToJson(taskRequest);
 
-        given().body(taskRequestJson)
+        given().auth()
+                .basic("user", "pass")
+                .body(taskRequestJson)
                 .header(contentTypeJson)
                 .when()
                 .post("/task")
@@ -68,7 +70,10 @@ class TaskRestControllerTestIT {
 
         final String taskRequestJson = mapToJson(invalidTaskRequest);
 
-        given().body(taskRequestJson)
+        given().auth()
+                .preemptive()
+                .basic("user", "pass")
+                .body(taskRequestJson)
                 .header(contentTypeJson)
                 .when()
                 .post("/task")
@@ -83,7 +88,9 @@ class TaskRestControllerTestIT {
         String taskRequestJson = mapToJson(taskRequest);
 
         UUID taskId =
-                given().body(taskRequestJson)
+                given().auth()
+                        .basic("user", "pass")
+                        .body(taskRequestJson)
                         .header(contentTypeJson)
                         .when()
                         .post("/task")
@@ -94,14 +101,26 @@ class TaskRestControllerTestIT {
                         .as(Task.class)
                         .getId();
 
-        given().when().get("/task/" + taskId).then().assertThat().statusCode(200);
+        given().auth()
+                .basic("user", "pass")
+                .when()
+                .get("/task/" + taskId)
+                .then()
+                .assertThat()
+                .statusCode(200);
     }
 
     @Test
     void shouldNotGetInexistentTask() {
         UUID taskId = UUID.randomUUID();
 
-        given().when().get("/task/" + taskId).then().assertThat().statusCode(404);
+        given().auth()
+                .basic("user", "pass")
+                .when()
+                .get("/task/" + taskId)
+                .then()
+                .assertThat()
+                .statusCode(404);
     }
 
     @Test
@@ -110,7 +129,9 @@ class TaskRestControllerTestIT {
         String taskRequestJson = mapToJson(taskRequest);
         UUID taskId = UUID.randomUUID();
 
-        given().body(taskRequestJson)
+        given().auth()
+                .basic("user", "pass")
+                .body(taskRequestJson)
                 .header(contentTypeJson)
                 .when()
                 .put("/task/" + taskId)
@@ -125,7 +146,9 @@ class TaskRestControllerTestIT {
         String taskRequestJson = mapToJson(taskRequest);
 
         UUID taskId =
-                given().body(taskRequestJson)
+                given().auth()
+                        .basic("user", "pass")
+                        .body(taskRequestJson)
                         .header(contentTypeJson)
                         .when()
                         .post("/task")
@@ -139,7 +162,9 @@ class TaskRestControllerTestIT {
         taskRequest.setName("new name");
         String taskRequestUpdatedJson = mapToJson(taskRequest);
 
-        given().body(taskRequestUpdatedJson)
+        given().auth()
+                .basic("user", "pass")
+                .body(taskRequestUpdatedJson)
                 .header(contentTypeJson)
                 .when()
                 .put("/task/" + taskId)
@@ -154,7 +179,9 @@ class TaskRestControllerTestIT {
     @Test
     void shouldGetNoTasks() {
 
-        given().header(contentTypeJson)
+        given().auth()
+                .basic("user", "pass")
+                .header(contentTypeJson)
                 .when()
                 .get("/tasks")
                 .then()
@@ -170,7 +197,9 @@ class TaskRestControllerTestIT {
         TaskRequest taskRequest = createTaskRequest();
         String taskRequestJson = mapToJson(taskRequest);
 
-        given().body(taskRequestJson)
+        given().auth()
+                .basic("user", "pass")
+                .body(taskRequestJson)
                 .header(contentTypeJson)
                 .when()
                 .post("/task")
@@ -181,7 +210,9 @@ class TaskRestControllerTestIT {
         TaskRequest secondTaskRequest = createTaskRequest();
         String secondTaskRequestJson = mapToJson(secondTaskRequest);
 
-        given().body(secondTaskRequestJson)
+        given().auth()
+                .basic("user", "pass")
+                .body(secondTaskRequestJson)
                 .header(contentTypeJson)
                 .when()
                 .post("/task")
@@ -189,7 +220,9 @@ class TaskRestControllerTestIT {
                 .assertThat()
                 .statusCode(201);
 
-        given().header(contentTypeJson)
+        given().auth()
+                .basic("user", "pass")
+                .header(contentTypeJson)
                 .when()
                 .get("/tasks")
                 .then()
