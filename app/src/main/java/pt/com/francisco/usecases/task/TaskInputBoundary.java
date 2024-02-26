@@ -2,18 +2,17 @@ package pt.com.francisco.usecases.task;
 
 import java.util.List;
 import java.util.UUID;
-import pt.com.francisco.entities.Task;
 
 public interface TaskInputBoundary {
-    Task createTask(Task task);
+    TaskResponse createTask(TaskRequest task);
 
-    Task updateTask(UUID taskId, Task task);
+    TaskResponse updateTask(UUID taskId, TaskRequest task);
 
     void removeTask(UUID id);
 
     void completeTask(UUID id);
 
-    Task getTask(UUID id);
+    TaskResponse getTask(UUID id);
 
-    List<Task> getAllTasks();
+    List<TaskResponse> getAllTasks();
 }

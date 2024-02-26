@@ -13,14 +13,14 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/taskResponse'
+                                $ref: '#/components/schemas/TaskResponse'
                 default:
                     description: Unexpected error
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/taskRequest'
+                            $ref: '#/components/schemas/TaskRequest'
     /task/{id}:
         parameters:
             - in: path
@@ -38,7 +38,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/taskResponse'
+                                $ref: '#/components/schemas/TaskResponse'
                 '400':
                     description: Invalid request
                 default:
@@ -52,13 +52,13 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/taskResponse'
+                                $ref: '#/components/schemas/TaskResponse'
                 '204':
                     description: Task updated successfully
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/taskResponse'
+                                $ref: '#/components/schemas/TaskResponse'
                 '400':
                     description: Invalid request
                 default:
@@ -67,7 +67,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/taskRequest'
+                            $ref: '#/components/schemas/TaskRequest'
     /tasks:
         get:
             description: returns all tasks from the system
@@ -79,7 +79,7 @@ paths:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/taskResponse'
+                                    $ref: '#/components/schemas/TaskResponse'
                 '400':
                     description: Invalid request
                 default:
@@ -87,36 +87,13 @@ paths:
 
 components:
     schemas:
-        taskResponse:
+        TaskResponse:
             type: object
             properties:
-                id:
-                    type: string
-                    format: uuid
-                name:
-                    type: string
-                description:
-                    type: string
-                status:
-                    type: string
-                    enum:
-                        - finished
-                        - doing
-                        - not_started
-                startDate:
-                    type: string
-                finishedDate:
-                    type: string
-        taskRequest:
+                taskResponse:
+                    $ref: 'TaskResponse'
+        TaskRequest:
             type: object
             properties:
-                name:
-                    type: string
-                description:
-                    type: string
-                status:
-                    type: string
-                    enum:
-                        - finished
-                        - doing
-                        - not_started
+                taskRequest:
+                    $ref: 'TaskRequest'

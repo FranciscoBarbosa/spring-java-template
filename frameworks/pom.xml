@@ -121,6 +121,7 @@
                                 <interfaceOnly>true</interfaceOnly>
                                 <skipDefaultInterface>true</skipDefaultInterface>
                             </configOptions>
+                            <schemaMappings>TaskResponse=pt.com.francisco.usecases.task.TaskResponse,TaskRequest=pt.com.francisco.usecases.task.TaskRequest</schemaMappings>
                         </configuration>
                     </execution>
                 </executions>

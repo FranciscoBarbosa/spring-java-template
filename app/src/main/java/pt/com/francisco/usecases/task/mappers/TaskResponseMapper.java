@@ -1,10 +1,10 @@
-package pt.com.francisco.frameworks.web.mappers;
+package pt.com.francisco.usecases.task.mappers;
 
 import org.mapstruct.Mapper;
-import org.openapitools.model.TaskResponse;
 import pt.com.francisco.entities.Task;
+import pt.com.francisco.usecases.task.TaskResponse;
 
-@Mapper(componentModel = "spring")
+@Mapper
 public interface TaskResponseMapper {
     TaskResponse map(Task task);
 }

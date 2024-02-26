@@ -4,35 +4,40 @@ import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import pt.com.francisco.entities.Task;
+import pt.com.francisco.usecases.task.mappers.TaskRequestMapper;
+import pt.com.francisco.usecases.task.mappers.TaskResponseMapper;
 
 @RequiredArgsConstructor
 public class TaskInteractor implements TaskInputBoundary {
     private final TaskGateway taskGateway;
+    private final TaskResponseMapper taskResponseMapper;
+    private final TaskRequestMapper taskRequestMapper;
 
     @Override
-    public Task createTask(Task task) {
-        return taskGateway.create(task);
+    public TaskResponse createTask(TaskRequest task) {
+        return taskResponseMapper.map(taskGateway.create(taskRequestMapper.map(task)));
     }
 
     @Override
-    public Task updateTask(UUID taskId, Task task) {
-        return taskGateway.update(taskId, task);
+    public TaskResponse updateTask(UUID taskId, TaskRequest task) {
+        return taskResponseMapper.map(taskGateway.update(taskId, taskRequestMapper.map(task)));
     }
 
     @Override
     public void completeTask(UUID id) {
         final Task task = taskGateway.get(id).get();
+
         task.complete();
     }
 
     @Override
-    public Task getTask(UUID id) {
-        return taskGateway.get(id).get();
+    public TaskResponse getTask(UUID id) {
+        return taskResponseMapper.map(taskGateway.get(id).get());
     }
 
     @Override
-    public List<Task> getAllTasks() {
-        return taskGateway.getAll();
+    public List<TaskResponse> getAllTasks() {
+        return taskGateway.getAll().stream().map(taskResponseMapper::map).toList();
     }
 
     @Override
