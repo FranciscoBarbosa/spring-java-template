@@ -14,8 +14,7 @@
 	<description>Template project for Spring Boot</description>
 	<packaging>pom</packaging>
 	<modules>
-		<module>entities</module>
-		<module>app</module>
+		<module>core</module>
 		<module>interfaceAdapters</module>
 		<module>frameworks</module>
 		<module>reportAggregate</module>
