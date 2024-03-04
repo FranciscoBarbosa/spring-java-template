@@ -1,11 +1,9 @@
 package pt.com.francisco.usecases.task;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Data;
 
-@JsonTypeName("taskRequest")
 @Data
 public class TaskRequest {
 
@@ -49,4 +47,6 @@ public class TaskRequest {
     }
 
     private StatusEnum status;
+    private String startDate;
+    private String finishedDate;
 }

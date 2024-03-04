@@ -3,77 +3,26 @@ package pt.com.francisco.entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Data;
-import lombok.NonNull;
 import pt.com.francisco.entities.exceptions.TaskException;
 
 @Data
 public class Task {
-    private UUID
-            id; // using long might expose other resources by increasing id for example getBy/1,
+    private final UUID
+            id; // using long might expose other resources by increasing id for example getBy/1,//
     // getBy/2
-    @NonNull private String name;
-    @NonNull private String description;
-    @NonNull private Status status;
+    private String name;
+    private String description;
+    private Status status;
     private LocalDateTime startDate;
     private LocalDateTime finishedDate;
 
-    // TODO: replace these constructors by builder
-    public Task() {
-        this.id = UUID.randomUUID();
-    }
-
-    public Task(String name, String description, Status status) {
-        validateInstantiationTaskParams(status, startDate, null);
-        this.id = UUID.randomUUID();
-        this.name = name;
-        this.description = description;
-        this.status = status;
-    }
-
-    public Task(String name, String description, Status status, LocalDateTime startDate) {
-        validateInstantiationTaskParams(status, startDate, null);
-        this.id = UUID.randomUUID();
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.startDate = startDate;
-    }
-
-    public Task(
-            String name,
-            String description,
-            Status status,
-            LocalDateTime startDate,
-            LocalDateTime finishedDate) {
-        validateInstantiationTaskParams(status, startDate, finishedDate);
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.startDate = startDate;
-        this.finishedDate = finishedDate;
-    }
-
-    private void validateInstantiationTaskParams(
-            Status status, LocalDateTime startDate, LocalDateTime finishedDate) {
-        if (status == Status.NOT_STARTED) {
-            if (startDate != null) {
-                throw new TaskException("Not started tasks can't have a startDate");
-            }
-            if (finishedDate != null) {
-                throw new TaskException("Not started tasks can't have a finishedDate");
-            }
-        }
-        if (status == Status.DOING) {
-            if (startDate == null) {
-                throw new TaskException("Doing tasks must have a startDate");
-            }
-            if (finishedDate != null) {
-                throw new TaskException("Not finished tasks can't have a finishedDate");
-            }
-        }
-        if (status == Status.FINISHED && (startDate == null || finishedDate == null)) {
-            throw new TaskException("Finished tasks must have a start and finished date");
-        }
+    private Task(TaskBuilder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.description = builder.description;
+        this.status = builder.status;
+        this.startDate = builder.startDate;
+        this.finishedDate = builder.finishedDate;
     }
 
     public void complete() {
@@ -84,9 +33,82 @@ public class Task {
         finishedDate = LocalDateTime.now();
     }
 
-    //    public void setName(String name){
-    //        if(name == null){
-    //            throw new TaskException("task name can't be null");
-    //        }
-    //    }
+    public static Task.TaskBuilder builder() {
+        return new Task.TaskBuilder();
+    }
+
+    public static class TaskBuilder {
+        private UUID id; // using long might expose other resources by increasing id for example
+        // getBy/1,// getBy/2
+        private String name;
+        private String description;
+        private Status status;
+        private LocalDateTime startDate;
+        private LocalDateTime finishedDate;
+
+        public TaskBuilder() {}
+
+        public TaskBuilder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+
+        public TaskBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public TaskBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public TaskBuilder status(Status status) {
+            this.status = status;
+            return this;
+        }
+
+        public TaskBuilder startDate(LocalDateTime startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public TaskBuilder finishedDate(LocalDateTime finishedDate) {
+            this.finishedDate = finishedDate;
+            return this;
+        }
+
+        public Task build() {
+            validateInstantiationTaskParams();
+            if (id == null) {
+                id = UUID.randomUUID();
+            }
+            return new Task(this);
+        }
+
+        private void validateInstantiationTaskParams() {
+            if (status == null) {
+                throw new TaskException("Cannot create task without status");
+            }
+            if (status == Status.NOT_STARTED) {
+                if (startDate != null) {
+                    throw new TaskException("Not started tasks can't have a startDate");
+                }
+                if (finishedDate != null) {
+                    throw new TaskException("Not started tasks can't have a finishedDate");
+                }
+            }
+            if (status == Status.DOING) {
+                if (startDate == null) {
+                    throw new TaskException("Doing tasks must have a startDate");
+                }
+                if (finishedDate != null) {
+                    throw new TaskException("Not finished tasks can't have a finishedDate");
+                }
+            }
+            if (status == Status.FINISHED && (startDate == null || finishedDate == null)) {
+                throw new TaskException("Finished tasks must have a start and finished date");
+            }
+        }
+    }
 }

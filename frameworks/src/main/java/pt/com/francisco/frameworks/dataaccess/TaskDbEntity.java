@@ -1,8 +1,6 @@
 package pt.com.francisco.frameworks.dataaccess;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,9 +14,7 @@ import pt.com.francisco.entities.Status;
 @Setter
 @NoArgsConstructor
 public class TaskDbEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @Id private UUID id;
 
     private String name;
     private String description;
@@ -26,7 +22,8 @@ public class TaskDbEntity {
     private LocalDateTime startDate;
     private LocalDateTime finishedDate;
 
-    TaskDbEntity(String name, String description, Status status) {
+    TaskDbEntity(UUID id, String name, String description, Status status) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.status = status;

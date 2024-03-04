@@ -1,12 +1,10 @@
 package pt.com.francisco.usecases.task;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.UUID;
 import lombok.Data;
 
-@JsonTypeName("taskResponse")
 @Data
 public class TaskResponse {
 

@@ -20,7 +20,10 @@ class TaskGatewayTestIT {
     @Autowired TaskGatewayImpl taskGatewayImpl;
     @Autowired TaskDbRepository taskDbRepository;
     @Autowired TaskDbEntityMapper taskDbEntityMapper;
-    final TaskDbEntity firstTask = new TaskDbEntity("firstTask", "description", Status.NOT_STARTED);
+    static final UUID FIRST_UUID = UUID.randomUUID();
+    static final UUID SECOND_UUID = UUID.randomUUID();
+    final TaskDbEntity firstTask =
+            new TaskDbEntity(FIRST_UUID, "firstTask", "description", Status.NOT_STARTED);
 
     @BeforeEach
     void setUp() {
@@ -29,18 +32,16 @@ class TaskGatewayTestIT {
 
     @Test
     void shouldGetCachedTask() {
-        UUID firstTaskUUID = firstTask.getId();
-        Task task = taskGatewayImpl.get(firstTaskUUID).get();
+        Task task = taskGatewayImpl.get(FIRST_UUID).get();
 
-        Assertions.assertThat(task).isEqualTo(getCachedTask(firstTaskUUID).get());
+        Assertions.assertThat(task).isEqualTo(getCachedTask(FIRST_UUID).get());
     }
 
     @Test
     void shouldNotGetCachedTask() {
-        final TaskDbEntity secondTask = new TaskDbEntity("secondTask", "description", Status.DOING);
-        UUID secondTaskUUID = secondTask.getId();
+        new TaskDbEntity(SECOND_UUID, "secondTask", "description", Status.DOING);
 
-        Assertions.assertThat(Optional.empty()).isEqualTo(getCachedTask(secondTaskUUID));
+        Assertions.assertThat(Optional.empty()).isEqualTo(getCachedTask(SECOND_UUID));
     }
 
     private Optional<Task> getCachedTask(UUID taskUUID) {

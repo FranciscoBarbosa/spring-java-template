@@ -1,11 +1,5 @@
 package pt.com.francisco.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
-// @JsonFormat(shape = JsonFormat.Shape.OBJECT) //TODO: can i do this? I need this to create a Task
-// from a json string
-// and to be able to  serialize status string to the enum
 public enum Status {
     FINISHED("finished"),
     DOING("doing"),
@@ -17,12 +11,10 @@ public enum Status {
         this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
         return this.value;
     }
 
-    @JsonCreator
     public static Status create(String val) {
         Status[] statuses = Status.values();
         for (Status status : statuses) {

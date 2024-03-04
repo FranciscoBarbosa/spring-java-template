@@ -18,8 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import pt.com.francisco.entities.Status;
-import pt.com.francisco.entities.Task;
 import pt.com.francisco.usecases.task.TaskRequest;
+import pt.com.francisco.usecases.task.TaskResponse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -98,7 +98,7 @@ class TaskRestControllerTestIT {
                         .assertThat()
                         .statusCode(201)
                         .extract()
-                        .as(Task.class)
+                        .as(TaskResponse.class)
                         .getId();
 
         given().auth()
@@ -156,7 +156,7 @@ class TaskRestControllerTestIT {
                         .assertThat()
                         .statusCode(201)
                         .extract()
-                        .as(Task.class)
+                        .as(TaskResponse.class)
                         .getId();
 
         taskRequest.setName("new name");

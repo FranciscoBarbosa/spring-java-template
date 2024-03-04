@@ -9,20 +9,16 @@ import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import pt.com.francisco.entities.exceptions.TaskException;
 
-public class TaskTest {
-    @Test
-    void shouldCreateDefaultTaskWithId() {
-        final var task = new Task();
-        Assertions.assertThat(task.getId()).isNotNull();
-    }
-
+class TaskTest {
     @Test
     void shouldCreateNotStartedTask() {
-        final var task =
-                new Task(
-                        "Buy Christmas gifts",
-                        "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                        Status.NOT_STARTED);
+        final Task task =
+                new Task.TaskBuilder()
+                        .name("Buy Christmas gifts")
+                        .description(
+                                "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                        .status(Status.NOT_STARTED)
+                        .build();
 
         Assertions.assertThat(task.getName()).isEqualTo("Buy Christmas gifts");
         Assertions.assertThat(task.getDescription())
@@ -33,13 +29,31 @@ public class TaskTest {
     }
 
     @Test
+    void shouldNotCreateTaskWithoutStatus() {
+
+        Exception ex =
+                assertThrows(
+                        TaskException.class,
+                        () ->
+                                new Task.TaskBuilder()
+                                        .name("Buy Christmas gifts")
+                                        .description(
+                                                "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                                        .build());
+
+        Assertions.assertThat(ex.getMessage()).isEqualTo("Cannot create task without status");
+    }
+
+    @Test
     void shouldCreateTaskOnDoingStatusWithStartDate() {
         final var task =
-                new Task(
-                        "Buy Christmas gifts",
-                        "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                        Status.DOING,
-                        LocalDateTime.of(2023, 11, 23, 10, 2));
+                new Task.TaskBuilder()
+                        .name("Buy Christmas gifts")
+                        .description(
+                                "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                        .status(Status.DOING)
+                        .startDate(LocalDateTime.of(2023, 11, 23, 10, 2))
+                        .build();
 
         Assertions.assertThat(task.getName()).isEqualTo("Buy Christmas gifts");
         Assertions.assertThat(task.getDescription())
@@ -52,12 +66,14 @@ public class TaskTest {
     @Test
     void shouldCreateTaskOnFinishedStatusWithStartAndFinishedDate() {
         final var task =
-                new Task(
-                        "Buy Christmas gifts",
-                        "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                        Status.FINISHED,
-                        LocalDateTime.of(2023, 11, 23, 10, 2),
-                        LocalDateTime.of(2023, 12, 5, 19, 10));
+                new Task.TaskBuilder()
+                        .name("Buy Christmas gifts")
+                        .description(
+                                "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                        .status(Status.FINISHED)
+                        .startDate(LocalDateTime.of(2023, 11, 23, 10, 2))
+                        .finishedDate(LocalDateTime.of(2023, 12, 5, 19, 10))
+                        .build();
 
         Assertions.assertThat(task.getName()).isEqualTo("Buy Christmas gifts");
         Assertions.assertThat(task.getDescription())
@@ -74,10 +90,12 @@ public class TaskTest {
                 assertThrows(
                         TaskException.class,
                         () -> {
-                            new Task(
-                                    "Buy Christmas gifts",
-                                    "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                                    Status.DOING);
+                            new Task.TaskBuilder()
+                                    .name("Buy Christmas gifts")
+                                    .description(
+                                            "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                                    .status(Status.DOING)
+                                    .build();
                         });
 
         Assertions.assertThat(ex.getMessage()).isEqualTo("Doing tasks must have a startDate");
@@ -89,11 +107,12 @@ public class TaskTest {
                 assertThrows(
                         TaskException.class,
                         () -> {
-                            new Task(
-                                    "Buy Christmas gifts",
-                                    "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                                    Status.DOING,
-                                    null);
+                            new Task.TaskBuilder()
+                                    .name("Buy Christmas gifts")
+                                    .description(
+                                            "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                                    .status(Status.DOING)
+                                    .build();
                         });
 
         Assertions.assertThat(ex.getMessage()).isEqualTo("Doing tasks must have a startDate");
@@ -105,11 +124,12 @@ public class TaskTest {
                 assertThrows(
                         TaskException.class,
                         () -> {
-                            new Task(
-                                    "Buy Christmas gifts",
-                                    "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                                    Status.FINISHED,
-                                    null);
+                            new Task.TaskBuilder()
+                                    .name("Buy Christmas gifts")
+                                    .description(
+                                            "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                                    .status(Status.FINISHED)
+                                    .build();
                         });
 
         Assertions.assertThat(ex.getMessage())
@@ -122,11 +142,12 @@ public class TaskTest {
                 assertThrows(
                         TaskException.class,
                         () -> {
-                            new Task(
-                                    "Buy Christmas gifts",
-                                    "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                                    Status.FINISHED,
-                                    null);
+                            new Task.TaskBuilder()
+                                    .name("Buy Christmas gifts")
+                                    .description(
+                                            "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                                    .status(Status.FINISHED)
+                                    .build();
                         });
 
         Assertions.assertThat(ex.getMessage())
@@ -136,11 +157,13 @@ public class TaskTest {
     @Test
     void shouldCompleteTask() {
         final var task =
-                new Task(
-                        "Buy Christmas gifts",
-                        "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                        Status.DOING,
-                        LocalDateTime.of(2023, 11, 23, 10, 2));
+                new Task.TaskBuilder()
+                        .name("Buy Christmas gifts")
+                        .description(
+                                "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                        .status(Status.DOING)
+                        .startDate(LocalDateTime.of(2023, 11, 23, 10, 2))
+                        .build();
         LocalDateTime currentLocalDate = LocalDateTime.of(2023, 11, 24, 1, 20);
 
         task.complete();
@@ -160,12 +183,14 @@ public class TaskTest {
                         TaskException.class,
                         () -> {
                             final var task =
-                                    new Task(
-                                            "Buy Christmas gifts",
-                                            "Buy a shirt to my brother, a hat to my mom and glasses to my gf",
-                                            Status.FINISHED,
-                                            LocalDateTime.of(2023, 11, 23, 10, 2),
-                                            LocalDateTime.of(2023, 11, 24, 10, 2));
+                                    new Task.TaskBuilder()
+                                            .name("Buy Christmas gifts")
+                                            .description(
+                                                    "Buy a shirt to my brother, a hat to my mom and glasses to my gf")
+                                            .status(Status.FINISHED)
+                                            .startDate(LocalDateTime.of(2023, 11, 23, 10, 2))
+                                            .finishedDate(LocalDateTime.of(2023, 11, 24, 10, 2))
+                                            .build();
 
                             task.complete();
                         });
