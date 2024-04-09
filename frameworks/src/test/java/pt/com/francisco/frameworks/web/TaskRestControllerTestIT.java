@@ -18,8 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import pt.com.francisco.entities.Status;
-import pt.com.francisco.usecases.task.TaskRequest;
-import pt.com.francisco.usecases.task.TaskResponse;
+import pt.com.francisco.usecases.task.dto.TaskRequest;
+import pt.com.francisco.usecases.task.dto.TaskResponse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)

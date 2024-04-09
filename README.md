@@ -104,7 +104,7 @@ This repository contains a template project with some of the best practices for 
 ## Version 2.0.0
 * Add test containers
 * Add SonarQube
-* Add cache
+* Add local cache
 * Add visual code evolution as DNA
 * REST third level of maturity
 
@@ -120,6 +120,7 @@ This repository contains a template project with some of the best practices for 
 * Acceptance criteria tests
 * Smoke tests
 * Add option to run with GraalVm (compare metrics between Graalvm and Jvm)
+* Feature Flag pattern
 
 # Next Steps
 * Async communication between 2 microservices using Kafka

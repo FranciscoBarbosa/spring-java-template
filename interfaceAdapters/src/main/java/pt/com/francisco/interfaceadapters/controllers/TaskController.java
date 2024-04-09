@@ -4,27 +4,33 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
-import pt.com.francisco.usecases.task.TaskInputBoundary;
-import pt.com.francisco.usecases.task.TaskRequest;
-import pt.com.francisco.usecases.task.TaskResponse;
+import org.apache.commons.lang3.tuple.Pair;
+import pt.com.francisco.entities.exceptions.TaskNotFoundException;
+import pt.com.francisco.usecases.task.dto.TaskRequest;
+import pt.com.francisco.usecases.task.dto.TaskResponse;
+import pt.com.francisco.usecases.task.interactors.TaskInputBoundaryFactory;
 
 @RequiredArgsConstructor
 public class TaskController {
-    private final TaskInputBoundary taskInputBoundary;
+    private final TaskInputBoundaryFactory taskInputBoundaryFactory;
 
     public TaskResponse createNewTask(TaskRequest task) {
-        return taskInputBoundary.createTask(task);
+        return taskInputBoundaryFactory.getCreateTaskInteractor().execute(task);
     }
 
-    public TaskResponse getTask(UUID taskId) {
-        return taskInputBoundary.getTask(taskId);
+    public Optional<TaskResponse> getTask(UUID taskId) {
+        try {
+            return Optional.of(taskInputBoundaryFactory.getGetTaskInteractor().execute(taskId));
+        } catch (TaskNotFoundException e) {
+            return Optional.empty();
+        }
     }
 
     public TaskResponse updateTask(UUID taskId, TaskRequest task) {
-        return taskInputBoundary.updateTask(taskId, task);
+        return taskInputBoundaryFactory.getUpdateTaskInteractor().execute(Pair.of(taskId, task));
     }
 
-    public Optional<List<TaskResponse>> getAllTasks() {
-        return Optional.of(taskInputBoundary.getAllTasks().stream().toList());
+    public List<TaskResponse> getAllTasks() {
+        return taskInputBoundaryFactory.getGetAllTasksInteractor().execute(null);
     }
 }

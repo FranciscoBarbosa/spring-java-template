@@ -1,11 +1,14 @@
-package pt.com.francisco.usecases.task;
+package pt.com.francisco.usecases.task.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.UUID;
 import lombok.Data;
 
 @Data
-public class TaskRequest {
+public class TaskResponse {
+
+    private UUID id;
 
     private String name;
 
@@ -47,6 +50,8 @@ public class TaskRequest {
     }
 
     private StatusEnum status;
+
     private String startDate;
+
     private String finishedDate;
 }

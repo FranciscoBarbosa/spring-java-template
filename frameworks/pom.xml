@@ -106,7 +106,7 @@
                                 <interfaceOnly>true</interfaceOnly>
                                 <skipDefaultInterface>true</skipDefaultInterface>
                             </configOptions>
-                            <schemaMappings>TaskResponse=pt.com.francisco.usecases.task.TaskResponse,TaskRequest=pt.com.francisco.usecases.task.TaskRequest</schemaMappings>
+                            <schemaMappings>TaskResponse=pt.com.francisco.usecases.task.dto.TaskResponse,TaskRequest=pt.com.francisco.usecases.task.dto.TaskRequest</schemaMappings>
                         </configuration>
                     </execution>
                 </executions>

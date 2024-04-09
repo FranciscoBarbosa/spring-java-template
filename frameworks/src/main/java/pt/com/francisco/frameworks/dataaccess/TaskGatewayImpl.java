@@ -25,18 +25,18 @@ public class TaskGatewayImpl implements TaskGateway {
     @Override
     @Cacheable("tasks")
     public Optional<Task> get(UUID id) {
-        return Optional.ofNullable(taskDbEntityMapper.toTask(taskDbRepository.findById(id).get()));
+        Optional<TaskDbEntity> taskDbEntity = taskDbRepository.findById(id);
+        if (taskDbEntity.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(taskDbEntityMapper.toTask(taskDbEntity.get()));
     }
 
     @Override
     public Task update(UUID taskId, Task task) {
-        if (taskDbRepository.findById(taskId).isPresent()) {
-            TaskDbEntity taskDbEntity = taskDbRepository.findById(taskId).get();
-            recreateTask(taskDbEntity, taskId, task);
-            return taskDbEntityMapper.toTask(taskDbEntity);
-        } else {
-            return create(task);
-        }
+        TaskDbEntity taskDbEntity = taskDbRepository.findById(taskId).get();
+        recreateTask(taskDbEntity, taskId, task);
+        return taskDbEntityMapper.toTask(taskDbEntity);
     }
 
     @Override

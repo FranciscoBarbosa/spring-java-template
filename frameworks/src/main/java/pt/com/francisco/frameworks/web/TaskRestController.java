@@ -2,7 +2,7 @@ package pt.com.francisco.frameworks.web;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.openapi.spring.openapi_yml.api.TaskApi;
@@ -12,8 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 import pt.com.francisco.interfaceadapters.controllers.TaskController;
-import pt.com.francisco.usecases.task.TaskRequest;
-import pt.com.francisco.usecases.task.TaskResponse;
+import pt.com.francisco.usecases.task.dto.TaskRequest;
+import pt.com.francisco.usecases.task.dto.TaskResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +22,7 @@ import pt.com.francisco.usecases.task.TaskResponse;
 public class TaskRestController implements TaskApi, TasksApi {
     private final TaskController taskController;
 
+    // TODO: can it return optional empty? how to deal with it?
     @Override
     public ResponseEntity<TaskResponse> createNewTask(TaskRequest taskRequest) {
         try {
@@ -35,12 +36,11 @@ public class TaskRestController implements TaskApi, TasksApi {
     // TODO: check this exception returned, should we have a custom one?
     @Override
     public ResponseEntity<TaskResponse> getTask(UUID taskId) {
-        try {
-            final TaskResponse task = taskController.getTask(taskId);
-            return new ResponseEntity<>(task, HttpStatus.OK);
-        } catch (NoSuchElementException e) {
+        final Optional<TaskResponse> task = taskController.getTask(taskId);
+        if (task.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        return new ResponseEntity<>(task.get(), HttpStatus.OK);
     }
 
     // TODO: check if patch or put
@@ -56,7 +56,7 @@ public class TaskRestController implements TaskApi, TasksApi {
 
     @Override
     public ResponseEntity<List<TaskResponse>> getAllTasks() {
-        List<TaskResponse> taskResponseList = new ArrayList<>(taskController.getAllTasks().get());
+        List<TaskResponse> taskResponseList = new ArrayList<>(taskController.getAllTasks());
         return new ResponseEntity<>(taskResponseList, HttpStatus.OK);
     }
 }
