@@ -177,6 +177,47 @@ class TaskRestControllerTestIT {
     }
 
     @Test
+    void shouldNotDeleteInexistentTask() {
+        given().auth()
+                .basic("user", "pass")
+                .header(contentTypeJson)
+                .when()
+                .delete("/task/" + UUID.randomUUID())
+                .then()
+                .assertThat()
+                .statusCode(404);
+    }
+
+    @Test
+    void shouldDeleteTask() {
+        TaskRequest taskRequest = createTaskRequest();
+        String taskRequestJson = mapToJson(taskRequest);
+
+        UUID taskId =
+                given().auth()
+                        .basic("user", "pass")
+                        .body(taskRequestJson)
+                        .header(contentTypeJson)
+                        .when()
+                        .post("/task")
+                        .then()
+                        .assertThat()
+                        .statusCode(201)
+                        .extract()
+                        .as(TaskResponse.class)
+                        .getId();
+
+        given().auth()
+                .basic("user", "pass")
+                .header(contentTypeJson)
+                .when()
+                .delete("/task/" + taskId)
+                .then()
+                .assertThat()
+                .statusCode(204);
+    }
+
+    @Test
     void shouldGetNoTasks() {
 
         given().auth()

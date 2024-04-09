@@ -30,6 +30,10 @@ public class TaskController {
         return taskInputBoundaryFactory.getUpdateTaskInteractor().execute(Pair.of(taskId, task));
     }
 
+    public void deleteTask(UUID taskId) {
+        taskInputBoundaryFactory.getRemoveTaskInteractor().execute(taskId);
+    }
+
     public List<TaskResponse> getAllTasks() {
         return taskInputBoundaryFactory.getGetAllTasksInteractor().execute(null);
     }

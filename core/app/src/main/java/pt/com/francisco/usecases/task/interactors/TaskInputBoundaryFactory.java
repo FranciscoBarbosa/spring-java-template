@@ -20,7 +20,7 @@ public class TaskInputBoundaryFactory {
     private final TaskInputBoundary<TaskResponse, TaskRequest> createTaskInteractor;
     private final TaskInputBoundary<List<TaskResponse>, Void> getAllTasksInteractor;
     private final TaskInputBoundary<TaskResponse, UUID> getTaskInteractor;
-    private final TaskInputBoundary<Void, TaskRequest> removeTaskInteractor;
+    private final TaskInputBoundary<Void, UUID> removeTaskInteractor;
     private final TaskInputBoundary<TaskResponse, Pair<UUID, TaskRequest>> updateTaskInteractor;
     private final TaskResponseMapper taskResponseMapper = new TaskResponseMapperImpl();
     private final TaskRequestMapper taskRequestMapper = new TaskRequestMapperImpl();
@@ -32,7 +32,7 @@ public class TaskInputBoundaryFactory {
                 new CreateTaskInteractor(taskGateway, taskResponseMapper, taskRequestMapper);
         this.getAllTasksInteractor = new GetAllTasksInteractor(taskGateway, taskResponseMapper);
         this.getTaskInteractor = new GetTaskInteractor(taskGateway, taskResponseMapper);
-        this.removeTaskInteractor = new RemoveTaskInteractor(taskGateway, taskRequestMapper);
+        this.removeTaskInteractor = new RemoveTaskInteractor(taskGateway);
         this.updateTaskInteractor =
                 new UpdateTaskInteractor(taskGateway, taskResponseMapper, taskRequestMapper);
     }
